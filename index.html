@@ -81,36 +81,6 @@
 
       createScene();
 
-      function createStars() {
-        const stars = new THREE.Group();
-        const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff }); // Cor branca para as estrelas
-        const numStars = 2000; // Número de estrelas a serem criadas
-
-        for (let i = 0; i < numStars; i++) {
-          const starGeometry = new THREE.SphereGeometry(
-            Math.random() * 0.5,
-            12,
-            12
-          ); // Tamanho aleatório para as estrelas
-          const star = new THREE.Mesh(starGeometry, starMaterial);
-
-          // Posiciona as estrelas aleatoriamente no céu
-          star.position.set(
-            (Math.random() - 0.5) * 1000, // Posição x aleatória
-            Math.random() * 500 + 50, // Posição y aleatória (acima do chão)
-            (Math.random() - 0.5) * 1000 // Posição z aleatória
-          );
-
-          stars.add(star);
-        }
-
-        return stars;
-      }
-
-      // Adiciona as estrelas à cena
-      const stars = createStars();
-      scene.add(stars);
-
       // =================== SCENE ===================
       // ====================================================================================================================
       // =================== PLAYER ===================
