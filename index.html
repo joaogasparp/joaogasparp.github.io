@@ -59,7 +59,7 @@
       );
       scene.add(sky);
 
-      scene.fog = new THREE.FogExp2(0xDFE9F3, 0.017);
+      scene.fog = new THREE.FogExp2(0xdfe9f3, 0.017);
 
       function createScene() {
         const directional1Light = new THREE.DirectionalLight(0xffffff, 0.4);
@@ -86,13 +86,14 @@
       // =================== PLAYER ===================
 
       const playerBody = new CANNON.Body({
-        mass: 50, // kg
-        shape: new CANNON.Sphere(0.5),
+        mass: 1,
+        position: new CANNON.Vec3(0, 0.5, 0),
+        shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1)),
       });
       playerBody.quaternion.set(Math.PI / 10, Math.PI / 4, 0, 2);
       world.addBody(playerBody);
 
-      const playerGeometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
+      const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
       const playerMaterial = new THREE.MeshPhongMaterial({ color: 0xfafafa });
       const playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
       playerMesh.castShadow = true;
@@ -169,13 +170,6 @@
       // =================== PLAYER ===================
       // ====================================================================================================================
       // =================== GROUND ===================
-
-      const groundBody = new CANNON.Body({
-        type: CANNON.Body.STATIC,
-        shape: new CANNON.Plane(),
-      });
-      groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
-      world.addBody(groundBody);
 
       var grassTexture = new THREE.TextureLoader().load(
         "assets/grass.png",
@@ -555,13 +549,6 @@
       // ====================================================================================================================
       // ===================== TOWER1 =====================
 
-      const towerBody = new CANNON.Body({
-        type: CANNON.Body.STATIC,
-        shape: new CANNON.Plane(),
-      });
-      towerBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
-      world.addBody(towerBody);
-
       loaderGLTF.load(
         "models/tower.glb",
         function (gltf) {
@@ -581,33 +568,85 @@
 
       // ===================== TOWER1 =====================
       // ====================================================================================================================
-      // ===================== CASTLE =====================
+      // ===================== GHOST =====================
 
-      // ===================== CASTLE =====================
+      let ghost;
+
+      function createGhost(x, y, z) {
+        const ghostGeometry = new THREE.BoxGeometry(1, 1, 1);
+        const ghostMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+        const ghostMesh = new THREE.Mesh(ghostGeometry, ghostMaterial);
+        ghostMesh.position.set(x, y, z);
+        scene.add(ghostMesh);
+
+        const ghostBody = new CANNON.Body({
+          mass: 1,
+          position: new CANNON.Vec3(x, y, z),
+          shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1)),
+        });
+        ghostBody.quaternion.set(Math.PI / 10, Math.PI / 4, 0, 2);
+        world.addBody(ghostBody);
+
+        loaderGLTF.load(
+          "models/ghost.glb",
+          function (gltf) {
+            ghost = gltf.scene;
+            ghost.position.set(x, y, z);
+            scene.add(ghost);
+          },
+          function (xhr) {
+            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+          },
+          function (error) {
+            console.log("An error happened");
+          }
+        );
+
+        playerBody.addEventListener("collide", function (event) {
+          if (event.body == ghostBody) {
+            console.log("Player collided with ghost");
+          }
+        });
+
+        return { ghostMesh, ghostBody };
+      }
+
+      const { ghostMesh, ghostBody } = createGhost(10, 0, 0);
+
+      function updateGhostPosition() {
+        const direction = new THREE.Vector3();
+        direction.subVectors(playerMesh.position, ghostMesh.position).normalize();
+
+        ghostMesh.position.add(direction.multiplyScalar(0.02));
+        ghost.position.copy(ghostMesh.position);
+
+        const angle = ghostMesh.rotation.y - Math.atan2(-direction.x, direction.z);
+        ghost.rotation.y = angle;
+      }
+
+      // ===================== GHOST =====================
       // ====================================================================================================================
       // =================== ANIMATION ===================
 
-      function animate() {
+      requestAnimationFrame(function animate() {
         requestAnimationFrame(animate);
+        world.step(1 / 60);
 
         updatePlayerPosition();
         camera.position.copy(playerMesh.position);
         camera.position.y += 1.2;
 
-        // treeBody1.position.copy(treeBody1.position);
-        // treeBody1.quaternion.copy(treeBody1.quaternion);
-
-        // treeBody2.position.copy(treeBody2.position);
-        // treeBody2.quaternion.copy(treeBody2.quaternion);
-
         playerBody.position.copy(playerMesh.position);
         playerBody.quaternion.copy(playerMesh.quaternion);
+
+        updateGhostPosition();
+        ghostBody.position.copy(ghostMesh.position);
+        ghostBody.quaternion.copy(ghostMesh.quaternion);
 
         world.fixedStep();
 
         renderer.render(scene, camera);
-      }
-      animate();
+      });
 
       // =================== ANIMATION ===================
     </script>
