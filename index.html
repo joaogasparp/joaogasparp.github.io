@@ -191,23 +191,6 @@
 
       const loaderGLTF = new GLTFLoader();
 
-      // function createGrass1AtPosition(x, y, z) {
-      //   loaderGLTF.load(
-      //     "models/grass1.glb",
-      //     function (gltf) {
-      //       const grass = gltf.scene;
-      //       grass.position.set(x, y, z);
-      //       scene.add(grass);
-      //     },
-      //     function (xhr) {
-      //       console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      //     },
-      //     function (error) {
-      //       console.log("An error happened");
-      //     }
-      //   );
-      // }
-
       function createGrass2AtPosition(x, y, z) {
         loaderGLTF.load(
           "models/grass2.glb",
@@ -229,12 +212,6 @@
         const positions = [];
         const grassRadius = 100;
 
-        // for (let i = 0; i < numGrass1; i++) {
-        //   let position = generatePosition(positions, grassRadius, minDistance);
-        //   positions.push(position);
-        //   createGrass1AtPosition(position.x, 0, position.z);
-        // }
-
         for (let i = 0; i < numGrass2; i++) {
           let position = generatePosition(positions, grassRadius, minDistance);
           positions.push(position);
@@ -243,55 +220,6 @@
       }
 
       createGrasses(0, 40, 5);
-
-      // ====================================================================================================================
-      // ===================== TREE =====================
-
-      // const treeBody1 = new CANNON.Body({
-      //   type: CANNON.Body.STATIC,
-      //   shape: new CANNON.Plane(),
-      // });
-      // treeBody1.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
-      // world.addBody(treeBody1);
-
-      // loader.load(
-      //   "models/tree1.glb",
-      //   function (gltf) {
-      //     const tree = gltf.scene;
-      //     tree.position.set(5, 0, 5);
-      //     tree.scale.set(0.4, 0.4, 0.4);
-      //     scene.add(tree);
-      //   },
-      //   function (xhr) {
-      //     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      //   },
-      //   function (error) {
-      //     console.log("An error happened");
-      //   }
-      // );
-
-      // const treeBody2 = new CANNON.Body({
-      //   type: CANNON.Body.STATIC,
-      //   shape: new CANNON.Plane(),
-      // });
-      // treeBody2.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
-      // world.addBody(treeBody2);
-
-      // loader.load(
-      //   "models/tree2.glb",
-      //   function (gltf) {
-      //     const tree = gltf.scene;
-      //     tree.position.set(-5, 3.8, -15);
-      //     tree.scale.set(3, 3, 3);
-      //     scene.add(tree);
-      //   },
-      //   function (xhr) {
-      //     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      //   },
-      //   function (error) {
-      //     console.log("An error happened");
-      //   }
-      // );
 
       function createTree4AtPosition(x, y, z) {
         loaderGLTF.load(
@@ -480,50 +408,6 @@
 
       createForest(8, 8, 10, 2, 60, 15);
 
-      // function createForest() {
-      //   const forest = new THREE.Group();
-      //   const numTrees = 100;
-      //   const forestRadius = 100; // Raio do círculo do plano
-      //   const minDistanceBetweenTrees = 5;
-
-      //   for (let i = 0; i < numTrees; i++) {
-      //     let tree = createTree();
-      //     let position;
-      //     while (true) {
-      //       // Gere uma posição aleatória dentro do círculo
-      //       const angle = Math.random() * Math.PI * 2;
-      //       const radius = forestRadius * Math.sqrt(Math.random());
-      //       position = {
-      //         x: radius * Math.cos(angle),
-      //         z: radius * Math.sin(angle),
-      //       };
-
-      //       let isFarEnough = true;
-      //       for (let j = 0; j < forest.children.length; j++) {
-      //         const otherTree = forest.children[j];
-      //         const distance = Math.sqrt(
-      //           Math.pow(position.x - otherTree.position.x, 2) +
-      //             Math.pow(position.z - otherTree.position.z, 2)
-      //         );
-      //         if (distance < minDistanceBetweenTrees) {
-      //           isFarEnough = false;
-      //           break;
-      //         }
-      //       }
-      //       if (isFarEnough) {
-      //         break;
-      //       }
-      //     }
-      //     tree.position.x = position.x;
-      //     tree.position.z = position.z;
-      //     forest.add(tree);
-      //   }
-      //   return forest;
-      // }
-
-      // const forest = createForest();
-      // scene.add(forest);
-
       // ===================== TREE =====================
       // ====================================================================================================================
       // ===================== HOUSE =====================
@@ -615,12 +499,15 @@
 
       function updateGhostPosition() {
         const direction = new THREE.Vector3();
-        direction.subVectors(playerMesh.position, ghostMesh.position).normalize();
+        direction
+          .subVectors(playerMesh.position, ghostMesh.position)
+          .normalize();
 
         ghostMesh.position.add(direction.multiplyScalar(0.02));
         ghost.position.copy(ghostMesh.position);
 
-        const angle = ghostMesh.rotation.y - Math.atan2(-direction.x, direction.z);
+        const angle =
+          ghostMesh.rotation.y - Math.atan2(-direction.x, direction.z);
         ghost.rotation.y = angle;
       }
 
