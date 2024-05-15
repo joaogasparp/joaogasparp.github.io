@@ -452,7 +452,7 @@
 
       // ===================== TOWER1 =====================
       // ====================================================================================================================
-      // ===================== GHOST =====================
+      // ===================== KING GHOST =====================
 
       let ghost;
 
@@ -511,7 +511,57 @@
         ghost.rotation.y = angle;
       }
 
-      // ===================== GHOST =====================
+      // ===================== KING GHOST =====================
+      // ====================================================================================================================
+      // ===================== WEAPON =====================
+
+      loaderGLTF.load(
+        "models/nerf_gun.glb",
+        function (gltf) {
+          const weapon = gltf.scene;
+          weapon.position.set(0.5, -1, -0.8);
+          weapon.rotation.set(0, Math.PI / 2, 0);
+          weapon.scale.set(0.1, 0.1, 0.1);
+          camera.add(weapon);
+        },
+        function (xhr) {
+          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        },
+        function (error) {
+          console.log("An error happened");
+        }
+      );
+
+      // ===================== WEAPON =====================
+      // ====================================================================================================================
+      // ===================== BULLETS =====================
+
+      const bullets = [];
+
+      function createBullet() {
+        const bulletGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+        const bulletMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const bulletMesh = new THREE.Mesh(bulletGeometry, bulletMaterial);
+        bulletMesh.position.copy(camera.position);
+        scene.add(bulletMesh);
+
+        const bulletBody = new CANNON.Body({
+          mass: 0.1,
+          position: new CANNON.Vec3().copy(camera.position),
+          shape: new CANNON.Sphere(0.05),
+        });
+        bulletBody.velocity.copy(
+          camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(20)
+        );
+        world.addBody(bulletBody);
+
+        bullets.push({ bulletMesh, bulletBody });
+      }
+
+      document.addEventListener("mousedown", createBullet);
+
+      // ===================== BULLETS =====================
+
       // ====================================================================================================================
       // =================== ANIMATION ===================
 
@@ -525,6 +575,11 @@
 
         playerBody.position.copy(playerMesh.position);
         playerBody.quaternion.copy(playerMesh.quaternion);
+
+        bullets.forEach(({ bulletMesh, bulletBody }) => {
+          bulletMesh.position.copy(bulletBody.position);
+          bulletMesh.quaternion.copy(bulletBody.quaternion);
+        });
 
         updateGhostPosition();
         ghostBody.position.copy(ghostMesh.position);
