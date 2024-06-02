@@ -3,9 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <title>Medieval Fantasy</title>
+    <title>Dark Night</title>
   </head>
   <body>
+    <div class="menu">
+      <h1>Dark Night</h1>
+      <button onclick="toggleInstructions()">Instructions</button>
+      <div id="instructions" style="display: none">
+        <p>Use the W, A, S, D keys to move the character.</p>
+        <p>Press the SPACE key to jump.</p>
+      </div>
+      <button onclick="toggleConfigurations()">Settings</button>
+      <div id="configurations" style="display: none">
+        <label for="volume">Volume:</label>
+        <input
+          type="range"
+          id="volume"
+          name="volume"
+          min="0"
+          max="1"
+          step="0.01"
+          onchange="setVolume(this.value)"
+        />
+      </div>
+      <button id="startButton">Play</button>
+    </div>
+    <div id="boss-life-container">
+      <div id="boss-name">Valark</div>
+      <div id="boss-life-bar"></div>
+    </div>
+    <div id="player-life-container">
+      <div id="player-life">Player life: 3</div>
+    </div>
+    <script>
+      function toggleInstructions() {
+        var instructions = document.getElementById("instructions");
+        if (instructions.style.display === "none") {
+          instructions.style.display = "block";
+        } else {
+          instructions.style.display = "none";
+        }
+      }
+
+      function toggleConfigurations() {
+        var configurations = document.getElementById("configurations");
+        if (configurations.style.display === "none") {
+          configurations.style.display = "block";
+        } else {
+          configurations.style.display = "none";
+        }
+      }
+
+      function setVolume(value) {
+        let volume = parseFloat(value);
+        sound.setVolume(value);
+      }
+    </script>
     <script type="importmap">
       {
         "imports": {
@@ -28,569 +81,817 @@
       import { TGALoader } from "three/tgaloader";
       import { RGBELoader } from "three/rgbeloader";
 
-      // =================== SCENE ===================
+      var isGameStarted = false;
 
-      const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.82, 0) });
-      let scene = new THREE.Scene();
-      let renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.shadowMap.enabled = true;
-      document.body.appendChild(renderer.domElement);
+      function startGame() {
+        if (!isGameStarted) {
+          document.querySelector(".menu").style.display = "none";
 
-      let camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        10000
-      );
-      camera.position.z = 5000;
-      const controls = new PointerLockControls(camera, renderer.domElement);
-      scene.add(controls.getObject());
+          // =================== SCENE ===================
 
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-      scene.add(ambientLight);
+          const world = new CANNON.World({
+            gravity: new CANNON.Vec3(0, -9.82, 0),
+          });
+          let scene = new THREE.Scene();
+          let renderer = new THREE.WebGLRenderer();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.shadowMap.enabled = true;
+          document.body.appendChild(renderer.domElement);
 
-      const sky = new THREE.Mesh(
-        new THREE.SphereGeometry(1000, 32, 32),
-        new THREE.MeshBasicMaterial({
-          color: 0x000c19,
-          side: THREE.DoubleSide,
-        })
-      );
-      scene.add(sky);
-
-      scene.fog = new THREE.FogExp2(0xdfe9f3, 0.017);
-
-      function createScene() {
-        const directional1Light = new THREE.DirectionalLight(0xffffff, 0.4);
-        directional1Light.castShadow = true;
-        directional1Light.position.set(25, 50, 25);
-        scene.add(directional1Light);
-
-        const sun1Geometry = new THREE.SphereGeometry(10, 50, 50);
-        const sun1Material = new THREE.MeshPhongMaterial({
-          emissive: 0xbac3ca,
-          emissiveIntensity: 5,
-        });
-        const sun1 = new THREE.Mesh(sun1Geometry, sun1Material);
-        sun1.position.set(25, 50, 25);
-        scene.add(sun1);
-
-        return scene;
-      }
-
-      createScene();
-
-      // =================== SCENE ===================
-      // ====================================================================================================================
-      // =================== PLAYER ===================
-
-      const playerBody = new CANNON.Body({
-        mass: 1,
-        position: new CANNON.Vec3(0, 0.5, 0),
-        shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1)),
-      });
-      playerBody.quaternion.set(Math.PI / 10, Math.PI / 4, 0, 2);
-      world.addBody(playerBody);
-
-      const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
-      const playerMaterial = new THREE.MeshPhongMaterial({ color: 0xfafafa });
-      const playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
-      playerMesh.castShadow = true;
-      playerMesh.receiveShadow = true;
-      scene.add(playerMesh);
-
-      playerMesh.position.set(0, 0.1, 0);
-
-      const keyboard = {};
-      document.addEventListener("keydown", (event) => {
-        keyboard[event.keyCode] = true;
-      });
-      document.addEventListener("keyup", (event) => {
-        keyboard[event.keyCode] = false;
-      });
-
-      document.addEventListener(
-        "click",
-        function () {
-          controls.lock();
-        },
-        false
-      );
-
-      let direction = new THREE.Vector3();
-      let verticalSpeed = 0;
-      let jumpSpeed = 0.1;
-      let canJump = true;
-
-      function updatePlayerPosition() {
-        const speed = 0.1;
-
-        controls.getDirection(direction);
-
-        direction.y = 0;
-        direction.normalize();
-
-        if (keyboard[87]) playerMesh.position.addScaledVector(direction, speed);
-        if (keyboard[83])
-          playerMesh.position.addScaledVector(direction, -speed);
-        if (keyboard[65])
-          playerMesh.position.addScaledVector(
-            new THREE.Vector3().crossVectors(
-              new THREE.Vector3(0, 1, 0),
-              direction
-            ),
-            speed
+          let camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            10000
           );
-        if (keyboard[68])
-          playerMesh.position.addScaledVector(
-            new THREE.Vector3().crossVectors(
-              new THREE.Vector3(0, 1, 0),
-              direction
-            ),
-            -speed
+          camera.position.z = 5000;
+          const controls = new PointerLockControls(camera, renderer.domElement);
+          scene.add(controls.getObject());
+
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+          scene.add(ambientLight);
+
+          const sky = new THREE.Mesh(
+            new THREE.SphereGeometry(1000, 32, 32),
+            new THREE.MeshBasicMaterial({
+              color: 0x000c19,
+              side: THREE.DoubleSide,
+            })
+          );
+          scene.add(sky);
+
+          scene.fog = new THREE.FogExp2(0xdfe9f3, 0.017);
+
+          function createScene() {
+            const directional1Light = new THREE.DirectionalLight(0xffffff, 0.4);
+            directional1Light.castShadow = true;
+            directional1Light.position.set(25, 50, 25);
+
+            directional1Light.shadow.camera.left = -60;
+            directional1Light.shadow.camera.right = 60;
+            directional1Light.shadow.camera.top = 60;
+            directional1Light.shadow.camera.bottom = -60;
+
+            scene.add(directional1Light);
+
+            const sun1Geometry = new THREE.SphereGeometry(10, 50, 50);
+            const sun1Material = new THREE.MeshPhongMaterial({
+              emissive: 0xbac3ca,
+              emissiveIntensity: 5,
+            });
+            const sun1 = new THREE.Mesh(sun1Geometry, sun1Material);
+            sun1.position.set(25, 50, 25);
+            scene.add(sun1);
+
+            return scene;
+          }
+
+          createScene();
+
+          // =================== SCENE ===================
+          // ====================================================================================================================
+          // =================== PLAYER ===================
+
+          let playerLife = 3;
+
+          const playerBody = new CANNON.Body({
+            mass: 1,
+            position: new CANNON.Vec3(0, 0.5, 0),
+            shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1)),
+          });
+          playerBody.quaternion.set(Math.PI / 10, Math.PI / 4, 0, 2);
+          world.addBody(playerBody);
+
+          const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
+          const playerMaterial = new THREE.MeshPhongMaterial({
+            opacity: 0,
+            transparent: true,
+          });
+          const playerMesh = new THREE.Mesh(playerGeometry, playerMaterial);
+          playerMesh.castShadow = true;
+          playerMesh.receiveShadow = true;
+          scene.add(playerMesh);
+
+          playerMesh.position.set(0, 0.1, 0);
+
+          const keyboard = {};
+          document.addEventListener("keydown", (event) => {
+            keyboard[event.keyCode] = true;
+          });
+          document.addEventListener("keyup", (event) => {
+            keyboard[event.keyCode] = false;
+          });
+
+          document.addEventListener(
+            "click",
+            function () {
+              controls.lock();
+            },
+            false
           );
 
-        if (keyboard[32] && canJump) {
-          verticalSpeed = jumpSpeed;
-          canJump = false;
-        }
+          let direction = new THREE.Vector3();
+          let verticalSpeed = 0;
+          let jumpSpeed = 0.1;
+          let canJump = true;
 
-        playerMesh.position.y += verticalSpeed;
+          function updatePlayerPosition() {
+            const speed = 0.1;
 
-        verticalSpeed -= 0.005;
+            controls.getDirection(direction);
 
-        if (playerMesh.position.y <= 0.5) {
-          playerMesh.position.y = 0.5;
-          canJump = true;
-          verticalSpeed = 0;
-        }
-      }
+            direction.y = 0;
+            direction.normalize();
 
-      // =================== PLAYER ===================
-      // ====================================================================================================================
-      // =================== GROUND ===================
+            if (keyboard[87])
+              playerMesh.position.addScaledVector(direction, speed);
+            if (keyboard[83])
+              playerMesh.position.addScaledVector(direction, -speed);
+            if (keyboard[65])
+              playerMesh.position.addScaledVector(
+                new THREE.Vector3().crossVectors(
+                  new THREE.Vector3(0, 1, 0),
+                  direction
+                ),
+                speed
+              );
+            if (keyboard[68])
+              playerMesh.position.addScaledVector(
+                new THREE.Vector3().crossVectors(
+                  new THREE.Vector3(0, 1, 0),
+                  direction
+                ),
+                -speed
+              );
 
-      var grassTexture = new THREE.TextureLoader().load(
-        "assets/grass.png",
-        function (texture) {
-          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-          texture.repeat.set(50, 50);
-        }
-      );
-      var groundMaterial = new THREE.MeshPhongMaterial({ map: grassTexture });
+            if (keyboard[32] && canJump) {
+              verticalSpeed = jumpSpeed;
+              canJump = false;
+            }
 
-      var groundGeometry = new THREE.CircleGeometry(100, 32);
+            playerMesh.position.y += verticalSpeed;
 
-      var groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
-      groundMesh.rotation.x = -Math.PI / 2;
-      scene.add(groundMesh);
+            verticalSpeed -= 0.005;
 
-      // =================== GROUND ===================
-      // ====================================================================================================================
-
-      const loaderGLTF = new GLTFLoader();
-
-      function createGrass2AtPosition(x, y, z) {
-        loaderGLTF.load(
-          "models/grass2.glb",
-          function (gltf) {
-            const grass = gltf.scene;
-            grass.position.set(x, y, z);
-            scene.add(grass);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          function (error) {
-            console.log("An error happened");
-          }
-        );
-      }
-
-      function createGrasses(numGrass1, numGrass2, minDistance) {
-        const positions = [];
-        const grassRadius = 100;
-
-        for (let i = 0; i < numGrass2; i++) {
-          let position = generatePosition(positions, grassRadius, minDistance);
-          positions.push(position);
-          createGrass2AtPosition(position.x, 0, position.z);
-        }
-      }
-
-      createGrasses(0, 40, 5);
-
-      function createTree4AtPosition(x, y, z) {
-        loaderGLTF.load(
-          "models/tree4.glb",
-          function (gltf) {
-            const tree = gltf.scene;
-            tree.position.set(x, y, z);
-            tree.scale.set(0.08, 0.08, 0.08);
-            scene.add(tree);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          function (error) {
-            console.log("An error happened");
-          }
-        );
-      }
-
-      function createTree5AtPosition(x, y, z) {
-        loaderGLTF.load(
-          "models/tree5.glb",
-          function (gltf) {
-            const tree = gltf.scene;
-            tree.position.set(x, y, z);
-            scene.add(tree);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          function (error) {
-            console.log("An error happened");
-          }
-        );
-      }
-
-      function createTree6AtPosition(x, y, z) {
-        loaderGLTF.load(
-          "models/tree6.glb",
-          function (gltf) {
-            const tree = gltf.scene;
-            tree.position.set(x, y, z);
-            scene.add(tree);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          function (error) {
-            console.log("An error happened");
-          }
-        );
-      }
-
-      function createTreeS1AtPosition(x, y, z) {
-        loaderGLTF.load(
-          "models/treeS1.glb",
-          function (gltf) {
-            const tree = gltf.scene;
-            tree.position.set(x, y, z);
-            tree.scale.set(2, 2, 2);
-            scene.add(tree);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          function (error) {
-            console.log("An error happened");
-          }
-        );
-      }
-
-      const playerHeight = 3.0;
-
-      function createTree(x, y, z) {
-        const heightScale = Math.random() * 0.5 + 0.75;
-
-        const trunkColor = new THREE.Color(0x6f4118);
-        const leafColor = new THREE.Color(0x3a6919);
-
-        const cylinderRadius = playerHeight / 4;
-        const cylinderHeight = playerHeight * 2 * heightScale;
-        const cylinderGeometry = new THREE.CylinderGeometry(
-          cylinderRadius,
-          cylinderRadius,
-          cylinderHeight,
-          32
-        );
-        const brownMaterial = new THREE.MeshPhongMaterial({
-          color: trunkColor,
-          shininess: 100,
-        });
-        const cylinder = new THREE.Mesh(cylinderGeometry, brownMaterial);
-        cylinder.position.y = cylinderHeight / 2.0;
-
-        const baseConeRadius = playerHeight / 2;
-        const coneHeight = playerHeight * 3 * heightScale;
-        const coneGeometry = new THREE.ConeGeometry(
-          baseConeRadius,
-          coneHeight,
-          32
-        );
-        const greenMaterial = new THREE.MeshPhongMaterial({
-          color: leafColor,
-          shininess: 100,
-        });
-        const cone = new THREE.Mesh(coneGeometry, greenMaterial);
-        cone.position.y = cylinderHeight + coneHeight / 2.0;
-
-        const tree = new THREE.Group();
-        tree.add(cylinder);
-        tree.add(cone);
-        tree.position.set(x, y, z);
-        scene.add(tree);
-      }
-
-      function createForest(
-        numTrees4,
-        numTrees5,
-        numTrees6,
-        numTreesS1,
-        numTrees,
-        minDistance
-      ) {
-        const positions = [];
-        const forestRadius = 100;
-
-        for (let i = 0; i < numTrees4; i++) {
-          let position = generatePosition(positions, forestRadius, minDistance);
-          positions.push(position);
-          createTree4AtPosition(position.x, 0, position.z);
-        }
-
-        for (let i = 0; i < numTrees5; i++) {
-          let position = generatePosition(positions, forestRadius, minDistance);
-          positions.push(position);
-          createTree5AtPosition(position.x, 0, position.z);
-        }
-
-        for (let i = 0; i < numTrees6; i++) {
-          let position = generatePosition(positions, forestRadius, minDistance);
-          positions.push(position);
-          createTree6AtPosition(position.x, 0, position.z);
-        }
-
-        for (let i = 0; i < numTreesS1; i++) {
-          let position = generatePosition(positions, forestRadius, minDistance);
-          positions.push(position);
-          createTreeS1AtPosition(position.x, 0, position.z);
-        }
-
-        for (let i = 0; i < numTrees; i++) {
-          let position = generatePosition(positions, forestRadius, minDistance);
-          positions.push(position);
-          createTree(position.x, 0, position.z);
-        }
-      }
-
-      function generatePosition(positions, forestRadius, minDistance) {
-        let position;
-        while (true) {
-          const angle = Math.random() * Math.PI * 2;
-          const radius = forestRadius * Math.sqrt(Math.random());
-          position = {
-            x: radius * Math.cos(angle),
-            z: radius * Math.sin(angle),
-          };
-
-          let isFarEnough = true;
-          for (let j = 0; j < positions.length; j++) {
-            const otherPosition = positions[j];
-            const distance = Math.sqrt(
-              Math.pow(position.x - otherPosition.x, 2) +
-                Math.pow(position.z - otherPosition.z, 2)
-            );
-            if (distance < minDistance) {
-              isFarEnough = false;
-              break;
+            if (playerMesh.position.y <= 0.5) {
+              playerMesh.position.y = 0.5;
+              canJump = true;
+              verticalSpeed = 0;
             }
           }
-          if (isFarEnough) {
-            break;
+
+          // =================== PLAYER ===================
+          // ====================================================================================================================
+          // =================== GROUND ===================
+
+          var grassTexture = new THREE.TextureLoader().load(
+            "assets/grass.png",
+            function (texture) {
+              texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+              texture.repeat.set(50, 50);
+            }
+          );
+          var groundMaterial = new THREE.MeshPhongMaterial({
+            map: grassTexture,
+          });
+
+          var groundGeometry = new THREE.CircleGeometry(100, 32);
+
+          var groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+          groundMesh.rotation.x = -Math.PI / 2;
+          groundMesh.receiveShadow = true;
+          scene.add(groundMesh);
+
+          const loaderGLTF = new GLTFLoader();
+
+          function createGrass2AtPosition(x, y, z) {
+            loaderGLTF.load(
+              "models/grass2.glb",
+              function (gltf) {
+                const grass = gltf.scene;
+                grass.position.set(x, y, z);
+                grass.traverse(function (node) {
+                  if (node.isMesh) {
+                    node.receiveShadow = true;
+                  }
+                });
+                scene.add(grass);
+              },
+              function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              },
+              function (error) {
+                console.log("An error happened");
+              }
+            );
           }
-        }
-        return position;
-      }
 
-      createForest(8, 8, 10, 2, 60, 15);
+          function createGrasses(numGrass1, numGrass2, minDistance) {
+            const positions = [];
+            const grassRadius = 100;
 
-      // ===================== TREE =====================
-      // ====================================================================================================================
-      // ===================== HOUSE =====================
-
-      loaderGLTF.load(
-        "models/house2.glb",
-        function (gltf) {
-          const house = gltf.scene;
-          house.position.set(-40, 0, -50);
-          house.scale.set(30, 30, 30);
-          house.rotation.y = Math.PI;
-          scene.add(house);
-        },
-        function (xhr) {
-          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-        },
-        function (error) {
-          console.log("An error happened");
-        }
-      );
-
-      // ===================== HOUSE =====================
-      // ====================================================================================================================
-      // ===================== TOWER1 =====================
-
-      loaderGLTF.load(
-        "models/tower.glb",
-        function (gltf) {
-          const tower = gltf.scene;
-          tower.position.set(-15, 0, -60);
-          tower.rotation.y = Math.PI / 4;
-          tower.scale.set(1.5, 1.5, 1.5);
-          scene.add(tower);
-        },
-        function (xhr) {
-          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-        },
-        function (error) {
-          console.log("An error happened");
-        }
-      );
-
-      // ===================== TOWER1 =====================
-      // ====================================================================================================================
-      // ===================== KING GHOST =====================
-
-      let ghost;
-
-      function createGhost(x, y, z) {
-        const ghostGeometry = new THREE.BoxGeometry(1, 1, 1);
-        const ghostMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
-        const ghostMesh = new THREE.Mesh(ghostGeometry, ghostMaterial);
-        ghostMesh.position.set(x, y, z);
-        scene.add(ghostMesh);
-
-        const ghostBody = new CANNON.Body({
-          mass: 1,
-          position: new CANNON.Vec3(x, y, z),
-          shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1)),
-        });
-        ghostBody.quaternion.set(Math.PI / 10, Math.PI / 4, 0, 2);
-        world.addBody(ghostBody);
-
-        loaderGLTF.load(
-          "models/ghost.glb",
-          function (gltf) {
-            ghost = gltf.scene;
-            ghost.position.set(x, y, z);
-            scene.add(ghost);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          function (error) {
-            console.log("An error happened");
+            for (let i = 0; i < numGrass2; i++) {
+              let position = generatePosition(
+                positions,
+                grassRadius,
+                minDistance
+              );
+              positions.push(position);
+              createGrass2AtPosition(position.x, 0, position.z);
+            }
           }
-        );
 
-        playerBody.addEventListener("collide", function (event) {
-          if (event.body == ghostBody) {
-            console.log("Player collided with ghost");
+          createGrasses(0, 40, 5);
+
+          // =================== GROUND ===================
+          // ====================================================================================================================
+          // ===================== TREE =====================
+
+          function createTree4AtPosition(x, y, z) {
+            loaderGLTF.load(
+              "models/tree4.glb",
+              function (gltf) {
+                const tree = gltf.scene;
+                tree.position.set(x, y, z);
+                tree.scale.set(0.08, 0.08, 0.08);
+
+                scene.add(tree);
+              },
+              function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              },
+              function (error) {
+                console.log("An error happened");
+              }
+            );
           }
-        });
 
-        return { ghostMesh, ghostBody };
-      }
+          function createTree5AtPosition(x, y, z) {
+            loaderGLTF.load(
+              "models/tree5.glb",
+              function (gltf) {
+                const tree = gltf.scene;
+                tree.position.set(x, y, z);
 
-      const { ghostMesh, ghostBody } = createGhost(10, 0, 0);
+                scene.add(tree);
+              },
+              function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              },
+              function (error) {
+                console.log("An error happened");
+              }
+            );
+          }
 
-      function updateGhostPosition() {
-        const direction = new THREE.Vector3();
-        direction
-          .subVectors(playerMesh.position, ghostMesh.position)
-          .normalize();
+          function createTree6AtPosition(x, y, z) {
+            loaderGLTF.load(
+              "models/tree6.glb",
+              function (gltf) {
+                const tree = gltf.scene;
+                tree.position.set(x, y, z);
 
-        ghostMesh.position.add(direction.multiplyScalar(0.02));
-        ghost.position.copy(ghostMesh.position);
+                scene.add(tree);
+              },
+              function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              },
+              function (error) {
+                console.log("An error happened");
+              }
+            );
+          }
 
-        const angle =
-          ghostMesh.rotation.y - Math.atan2(-direction.x, direction.z);
-        ghost.rotation.y = angle;
-      }
+          function createTreeS1AtPosition(x, y, z) {
+            loaderGLTF.load(
+              "models/treeS1.glb",
+              function (gltf) {
+                const tree = gltf.scene;
+                tree.position.set(x, y, z);
+                tree.scale.set(2, 2, 2);
 
-      // ===================== KING GHOST =====================
-      // ====================================================================================================================
-      // ===================== WEAPON =====================
+                scene.add(tree);
+              },
+              function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              },
+              function (error) {
+                console.log("An error happened");
+              }
+            );
+          }
 
-      loaderGLTF.load(
-        "models/nerf_gun.glb",
-        function (gltf) {
-          const weapon = gltf.scene;
-          weapon.position.set(0.5, -1, -0.8);
-          weapon.rotation.set(0, Math.PI / 2, 0);
-          weapon.scale.set(0.1, 0.1, 0.1);
-          camera.add(weapon);
-        },
-        function (xhr) {
-          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-        },
-        function (error) {
-          console.log("An error happened");
+          const playerHeight = 3.0;
+
+          function createTree(x, y, z) {
+            const heightScale = Math.random() * 0.5 + 0.75;
+
+            const trunkColor = new THREE.Color(0x6f4118);
+            const leafColor = new THREE.Color(0x3a6919);
+
+            const cylinderRadius = playerHeight / 4;
+            const cylinderHeight = playerHeight * 2 * heightScale;
+            const cylinderGeometry = new THREE.CylinderGeometry(
+              cylinderRadius,
+              cylinderRadius,
+              cylinderHeight,
+              32
+            );
+            const brownMaterial = new THREE.MeshPhongMaterial({
+              color: trunkColor,
+              shininess: 100,
+            });
+            const cylinder = new THREE.Mesh(cylinderGeometry, brownMaterial);
+            cylinder.position.y = cylinderHeight / 2.0;
+
+            cylinder.castShadow = true;
+            cylinder.receiveShadow = true;
+
+            const baseConeRadius = playerHeight / 2;
+            const coneHeight = playerHeight * 3 * heightScale;
+            const coneGeometry = new THREE.ConeGeometry(
+              baseConeRadius,
+              coneHeight,
+              32
+            );
+            const greenMaterial = new THREE.MeshPhongMaterial({
+              color: leafColor,
+              shininess: 100,
+            });
+            const cone = new THREE.Mesh(coneGeometry, greenMaterial);
+            cone.position.y = cylinderHeight + coneHeight / 2.0;
+
+            cone.castShadow = true;
+            cone.receiveShadow = true;
+
+            const tree = new THREE.Group();
+            tree.add(cylinder);
+            tree.add(cone);
+            tree.position.set(x, y, z);
+            scene.add(tree);
+          }
+
+          function createForest(
+            numTrees4,
+            numTrees5,
+            numTrees6,
+            numTreesS1,
+            numTrees,
+            minDistance
+          ) {
+            const positions = [];
+            const forestRadius = 100;
+
+            for (let i = 0; i < numTrees4; i++) {
+              let position = generatePosition(
+                positions,
+                forestRadius,
+                minDistance
+              );
+              positions.push(position);
+              createTree4AtPosition(position.x, 0, position.z);
+            }
+
+            for (let i = 0; i < numTrees5; i++) {
+              let position = generatePosition(
+                positions,
+                forestRadius,
+                minDistance
+              );
+              positions.push(position);
+              createTree5AtPosition(position.x, 0, position.z);
+            }
+
+            for (let i = 0; i < numTrees6; i++) {
+              let position = generatePosition(
+                positions,
+                forestRadius,
+                minDistance
+              );
+              positions.push(position);
+              createTree6AtPosition(position.x, 0, position.z);
+            }
+
+            for (let i = 0; i < numTreesS1; i++) {
+              let position = generatePosition(
+                positions,
+                forestRadius,
+                minDistance
+              );
+              positions.push(position);
+              createTreeS1AtPosition(position.x, 0, position.z);
+            }
+
+            for (let i = 0; i < numTrees; i++) {
+              let position = generatePosition(
+                positions,
+                forestRadius,
+                minDistance
+              );
+              positions.push(position);
+              createTree(position.x, 0, position.z);
+            }
+          }
+
+          function generatePosition(positions, forestRadius, minDistance) {
+            let position;
+            while (true) {
+              const angle = Math.random() * Math.PI * 2;
+              const radius = forestRadius * Math.sqrt(Math.random());
+              position = {
+                x: radius * Math.cos(angle),
+                z: radius * Math.sin(angle),
+              };
+
+              let isFarEnough = true;
+              for (let j = 0; j < positions.length; j++) {
+                const otherPosition = positions[j];
+                const distance = Math.sqrt(
+                  Math.pow(position.x - otherPosition.x, 2) +
+                    Math.pow(position.z - otherPosition.z, 2)
+                );
+                if (distance < minDistance) {
+                  isFarEnough = false;
+                  break;
+                }
+              }
+              if (isFarEnough) {
+                break;
+              }
+            }
+            return position;
+          }
+
+          createForest(8, 8, 10, 2, 60, 15);
+
+          // ===================== TREE =====================
+          // ====================================================================================================================
+          // ===================== HOUSE =====================
+
+          loaderGLTF.load(
+            "models/house2.glb",
+            function (gltf) {
+              const house = gltf.scene;
+              house.position.set(-40, 0, -50);
+              house.scale.set(30, 30, 30);
+              house.rotation.y = Math.PI;
+              scene.add(house);
+            },
+            function (xhr) {
+              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+            },
+            function (error) {
+              console.log("An error happened");
+            }
+          );
+
+          // ===================== HOUSE =====================
+          // ====================================================================================================================
+          // ===================== TOWER1 =====================
+
+          loaderGLTF.load(
+            "models/tower.glb",
+            function (gltf) {
+              const tower = gltf.scene;
+              tower.position.set(-15, 0, -60);
+              tower.rotation.y = Math.PI / 4;
+              tower.scale.set(1.5, 1.5, 1.5);
+              scene.add(tower);
+            },
+            function (xhr) {
+              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+            },
+            function (error) {
+              console.log("An error happened");
+            }
+          );
+
+          // ===================== TOWER1 =====================
+          // ====================================================================================================================
+          // ===================== KING GHOST =====================
+
+          let ghost;
+          let ghostLife = 100;
+
+          const listener = new THREE.AudioListener();
+          camera.add(listener);
+
+          const sound = new THREE.PositionalAudio(listener);
+
+          const audioLoader = new THREE.AudioLoader();
+          audioLoader.load("sounds/ghostSound.mp3", function (buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(true);
+            sound.setRefDistance(20);
+            sound.play();
+          });
+
+          function createGhost(x, y, z) {
+            const ghostGeometry = new THREE.BoxGeometry(1, 9.5, 1);
+            const ghostMaterial = new THREE.MeshPhongMaterial({
+              color: 0x0000ff,
+              transparent: true,
+              opacity: 0,
+            });
+            const ghostMesh = new THREE.Mesh(ghostGeometry, ghostMaterial);
+            ghostMesh.position.set(x, y, z);
+            scene.add(ghostMesh);
+
+            const ghostBody = new CANNON.Body({
+              mass: 1,
+              position: new CANNON.Vec3(x, y, z),
+              shape: new CANNON.Box(new CANNON.Vec3(1, 9.5, 1)),
+            });
+            ghostBody.quaternion.set(Math.PI / 10, Math.PI / 4, 0, 2);
+            world.addBody(ghostBody);
+
+            ghostMesh.add(sound);
+
+            loaderGLTF.load(
+              "models/ghost.glb",
+              function (gltf) {
+                ghost = gltf.scene;
+                ghost.position.set(x, y, z);
+                scene.add(ghost);
+              },
+              function (xhr) {
+                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              },
+              function (error) {
+                console.log("An error happened");
+              }
+            );
+
+            let canCollide = true;
+
+            playerBody.addEventListener("collide", function (event) {
+              if (event.body === ghostBody && canCollide) {
+                playerLife -= 1;
+                document.getElementById(
+                  "player-life"
+                ).innerText = `Vida do Jogador: ${playerLife}`;
+
+                if (playerLife <= 0) {
+                  isGameStarted = false;
+
+                  controls.unlock();
+
+                  let gameOverMessage = document.createElement("div");
+                  gameOverMessage.textContent = "Game Over";
+                  gameOverMessage.style.position = "fixed";
+                  gameOverMessage.style.top = "0";
+                  gameOverMessage.style.left = "0";
+                  gameOverMessage.style.width = "100%";
+                  gameOverMessage.style.height = "100%";
+                  gameOverMessage.style.display = "flex";
+                  gameOverMessage.style.justifyContent = "center";
+                  gameOverMessage.style.alignItems = "center";
+                  gameOverMessage.style.fontSize = "3em";
+                  gameOverMessage.style.color = "#ff0000";
+                  gameOverMessage.style.textShadow = "2px 2px #ff0000";
+                  gameOverMessage.style.opacity = "0";
+                  gameOverMessage.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                  document.body.appendChild(gameOverMessage);
+
+                  let restartButton1 = document.createElement("button");
+                  restartButton1.textContent = "Reiniciar";
+                  restartButton1.style.position = "fixed";
+                  restartButton1.style.top = "60%";
+                  restartButton1.style.left = "50%";
+                  restartButton1.style.transform = "translate(-50%, -50%)";
+                  restartButton1.style.backgroundColor = "#000000";
+                  restartButton1.style.color = "#ff0000";
+                  restartButton1.style.border = "2px solid #ff0000";
+                  restartButton1.style.padding = "10px";
+                  restartButton1.style.cursor = "pointer";
+                  document.body.appendChild(restartButton1);
+
+                  restartButton1.addEventListener("click", function () {
+                    document.location.reload();
+                  });
+
+                  let opacityValue = 0;
+                  let fadeInInterval = setInterval(function () {
+                    if (opacityValue < 1) {
+                      opacityValue += 0.01;
+                      gameOverMessage.style.opacity = opacityValue.toString();
+                      gameOverMessage.style.backgroundColor = `rgba(0, 0, 0, ${opacityValue})`;
+                    } else {
+                      clearInterval(fadeInInterval);
+                    }
+                  }, 10);
+                }
+
+                canCollide = false;
+                setTimeout(() => {
+                  canCollide = true;
+                }, 2000);
+              }
+            });
+
+            return { ghostMesh, ghostBody };
+          }
+
+          const { ghostMesh, ghostBody } = createGhost(10, 0, 0);
+
+          let ghostSpeed = 0.02;
+          function updateGhostPosition() {
+            const direction = new THREE.Vector3();
+            direction
+              .subVectors(playerMesh.position, ghostMesh.position)
+              .normalize();
+
+            ghostMesh.position.add(direction.multiplyScalar(ghostSpeed));
+            ghost.position.copy(ghostMesh.position);
+
+            const angle =
+              ghostMesh.rotation.y - Math.atan2(-direction.x, direction.z);
+            ghost.rotation.y = angle;
+          }
+
+          // ===================== KING GHOST =====================
+          // ====================================================================================================================
+          // ===================== WEAPON =====================
+
+          loaderGLTF.load(
+            "models/nerf_gun.glb",
+            function (gltf) {
+              const weapon = gltf.scene;
+              weapon.position.set(0.5, -1, -0.8);
+              weapon.rotation.set(0, Math.PI / 2, 0);
+              weapon.scale.set(0.1, 0.1, 0.1);
+              camera.add(weapon);
+            },
+            function (xhr) {
+              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+            },
+            function (error) {
+              console.log("An error happened");
+            }
+          );
+
+          // ===================== WEAPON =====================
+          // ====================================================================================================================
+          // ===================== BULLETS =====================
+
+          const bullets = [];
+
+          function createBullet() {
+            const bulletGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+            const bulletMaterial = new THREE.MeshBasicMaterial({
+              color: 0xffffff,
+            });
+            const bulletMesh = new THREE.Mesh(bulletGeometry, bulletMaterial);
+            bulletMesh.position.copy(camera.position);
+            scene.add(bulletMesh);
+
+            const bulletBody = new CANNON.Body({
+              mass: 0.1,
+              position: new CANNON.Vec3().copy(camera.position),
+              shape: new CANNON.Sphere(0.05),
+            });
+            bulletBody.velocity.copy(
+              camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(20)
+            );
+            world.addBody(bulletBody);
+
+            bulletBody.addEventListener("collide", function (event) {
+              if (event.body === ghostBody) {
+                ghostLife -= 2;
+                document.getElementById(
+                  "boss-life-bar"
+                ).style.width = `${ghostLife}%`;
+
+                if (ghostLife <= 0) {
+                  isGameStarted = false;
+
+                  controls.unlock();
+
+                  let gameOverMessage = document.createElement("div");
+                  gameOverMessage.textContent = "Você venceu!";
+                  gameOverMessage.style.position = "fixed";
+                  gameOverMessage.style.top = "0";
+                  gameOverMessage.style.left = "0";
+                  gameOverMessage.style.width = "100%";
+                  gameOverMessage.style.height = "100%";
+                  gameOverMessage.style.display = "flex";
+                  gameOverMessage.style.justifyContent = "center";
+                  gameOverMessage.style.alignItems = "center";
+                  gameOverMessage.style.fontSize = "3em";
+                  gameOverMessage.style.color = "#ff0000";
+                  gameOverMessage.style.textShadow = "2px 2px #ff0000";
+                  gameOverMessage.style.opacity = "0";
+                  gameOverMessage.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                  document.body.appendChild(gameOverMessage);
+
+                  let restartButton1 = document.createElement("button");
+                  restartButton1.textContent = "Reiniciar";
+                  restartButton1.style.position = "fixed";
+                  restartButton1.style.top = "60%";
+                  restartButton1.style.left = "50%";
+                  restartButton1.style.transform = "translate(-50%, -50%)";
+                  restartButton1.style.backgroundColor = "#000000";
+                  restartButton1.style.color = "#ff0000";
+                  restartButton1.style.border = "2px solid #ff0000";
+                  restartButton1.style.padding = "10px";
+                  restartButton1.style.cursor = "pointer";
+                  document.body.appendChild(restartButton1);
+
+                  restartButton1.addEventListener("click", function () {
+                    document.location.reload();
+                  });
+
+                  let fadeOutInterval = setInterval(function () {
+                    if (sound.getVolume() > 0) {
+                      sound.setVolume(sound.getVolume() - 0.01);
+                    } else {
+                      clearInterval(fadeOutInterval);
+                    }
+                  }, 100);
+
+                  let opacityValue = 0;
+                  let fadeInInterval = setInterval(function () {
+                    if (opacityValue < 1) {
+                      opacityValue += 0.01;
+                      gameOverMessage.style.opacity = opacityValue.toString();
+                      gameOverMessage.style.backgroundColor = `rgba(0, 0, 0, ${opacityValue})`;
+                    } else {
+                      clearInterval(fadeInInterval);
+                    }
+                  }, 10);
+                }
+
+                ghostSpeed *= 1.04;
+
+                if (
+                  ghostLife === 80 ||
+                  ghostLife === 66 ||
+                  ghostLife === 34 ||
+                  ghostLife === 16
+                ) {
+                  const newX = Math.random() * 100 - 50;
+                  const newZ = Math.random() * 100 - 50;
+
+                  ghostSpeed *= 1.1;
+
+                  ghostMesh.position.set(newX, ghostMesh.position.y, newZ);
+                  ghostBody.position.set(newX, ghostMesh.position.y, newZ);
+                  ghost.position.set(newX, ghostMesh.position.y, newZ);
+                }
+
+                scene.remove(bulletMesh);
+                world.removeBody(bulletBody);
+              }
+            });
+
+            bullets.push({ bulletMesh, bulletBody });
+          }
+
+          document.addEventListener("mousedown", createBullet);
+
+          // ===================== BULLETS =====================
+          // ====================================================================================================================
+          // =================== ANIMATION ===================
+
+          requestAnimationFrame(function animate() {
+            requestAnimationFrame(animate);
+            world.step(1 / 60);
+
+            updatePlayerPosition();
+            camera.position.copy(playerMesh.position);
+            camera.position.y += 1.2;
+
+            playerBody.position.copy(playerMesh.position);
+            playerBody.quaternion.copy(playerMesh.quaternion);
+
+            bullets.forEach(({ bulletMesh, bulletBody }) => {
+              bulletMesh.position.copy(bulletBody.position);
+              bulletMesh.quaternion.copy(bulletBody.quaternion);
+            });
+
+            updateGhostPosition();
+            ghostBody.position.copy(ghostMesh.position);
+            ghostBody.quaternion.copy(ghostMesh.quaternion);
+
+            world.fixedStep();
+
+            renderer.render(scene, camera);
+          });
+
+          // =================== ANIMATION ===================
+
+          document.getElementById("boss-life-container").style.display =
+            "block";
+          document.getElementById("player-life-container").style.display =
+            "block";
+
+          isGameStarted = true;
         }
-      );
-
-      // ===================== WEAPON =====================
-      // ====================================================================================================================
-      // ===================== BULLETS =====================
-
-      const bullets = [];
-
-      function createBullet() {
-        const bulletGeometry = new THREE.SphereGeometry(0.05, 32, 32);
-        const bulletMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-        const bulletMesh = new THREE.Mesh(bulletGeometry, bulletMaterial);
-        bulletMesh.position.copy(camera.position);
-        scene.add(bulletMesh);
-
-        const bulletBody = new CANNON.Body({
-          mass: 0.1,
-          position: new CANNON.Vec3().copy(camera.position),
-          shape: new CANNON.Sphere(0.05),
-        });
-        bulletBody.velocity.copy(
-          camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(20)
-        );
-        world.addBody(bulletBody);
-
-        bullets.push({ bulletMesh, bulletBody });
       }
 
-      document.addEventListener("mousedown", createBullet);
-
-      // ===================== BULLETS =====================
-
-      // ====================================================================================================================
-      // =================== ANIMATION ===================
-
-      requestAnimationFrame(function animate() {
-        requestAnimationFrame(animate);
-        world.step(1 / 60);
-
-        updatePlayerPosition();
-        camera.position.copy(playerMesh.position);
-        camera.position.y += 1.2;
-
-        playerBody.position.copy(playerMesh.position);
-        playerBody.quaternion.copy(playerMesh.quaternion);
-
-        bullets.forEach(({ bulletMesh, bulletBody }) => {
-          bulletMesh.position.copy(bulletBody.position);
-          bulletMesh.quaternion.copy(bulletBody.quaternion);
-        });
-
-        updateGhostPosition();
-        ghostBody.position.copy(ghostMesh.position);
-        ghostBody.quaternion.copy(ghostMesh.quaternion);
-
-        world.fixedStep();
-
-        renderer.render(scene, camera);
-      });
-
-      // =================== ANIMATION ===================
+      document
+        .getElementById("startButton")
+        .addEventListener("click", startGame);
     </script>
   </body>
 </html>
