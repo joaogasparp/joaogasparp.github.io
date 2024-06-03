@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <title>Dark Night</title>
-    <link rel="icon" href="assets/icon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
   </head>
   <body>
     <div class="menu">
@@ -737,6 +737,11 @@
 
           const bullets = [];
 
+          let shotBuffer;
+          audioLoader.load("sounds/shot.mp3", function (buffer) {
+            shotBuffer = buffer;
+          });
+
           function createBullet() {
             const bulletGeometry = new THREE.SphereGeometry(0.05, 32, 32);
             const bulletMaterial = new THREE.MeshBasicMaterial({
@@ -844,6 +849,12 @@
                 world.removeBody(bulletBody);
               }
             });
+
+            if (shotBuffer) {
+              const shotSound = new THREE.Audio(listener);
+              shotSound.setBuffer(shotBuffer);
+              shotSound.play();
+            }
 
             bullets.push({ bulletMesh, bulletBody });
           }
