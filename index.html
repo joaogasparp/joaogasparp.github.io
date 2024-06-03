@@ -771,6 +771,8 @@
                 if (ghostLife <= 0) {
                   isGameStarted = false;
 
+                  scene.remove(ghostMesh);
+
                   controls.unlock();
 
                   let gameOverMessage = document.createElement("div");
@@ -843,6 +845,10 @@
                   ghostMesh.position.set(newX, ghostMesh.position.y, newZ);
                   ghostBody.position.set(newX, ghostMesh.position.y, newZ);
                   ghost.position.set(newX, ghostMesh.position.y, newZ);
+                }
+
+                if (ghostLife % 20 === 0) {
+                  scene.fog.density += 0.0039;
                 }
 
                 scene.remove(bulletMesh);
