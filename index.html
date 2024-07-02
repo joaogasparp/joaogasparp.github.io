@@ -1,165 +1,91 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>embarque</title>
-    <link rel="icon" type="image/png" href="blacksquare_102672.ico" />
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
-      canvas {
-        display: block;
-      }
-    </style>
+    <link rel="icon" href="blacksquare_102672.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x000000);
-
-      const camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      camera.position.z = 50;
-
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
-
-      const light = new THREE.PointLight(0xffffff, 1, 1000);
-      light.position.set(10, 10, 10);
-      scene.add(light);
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
-      scene.add(ambientLight);
-
-      const geometry1 = new THREE.BoxGeometry(1, 1, 1);
-      const cubes = [];
-      const distance = 100;
-      const numberOfCubes = 200;
-
-      for (let i = 0; i < numberOfCubes; i++) {
-        const randomColor = new THREE.Color(
-          Math.random(),
-          Math.random(),
-          Math.random()
-        );
-        const material1 = new THREE.MeshPhongMaterial({ color: randomColor });
-
-        const cube = new THREE.Mesh(geometry1, material1);
-        cube.position.x = (Math.random() - 0.5) * distance;
-        cube.position.y = (Math.random() - 0.5) * distance;
-        cube.position.z = (Math.random() - 0.5) * distance;
-        cubes.push(cube);
-        scene.add(cube);
-      }
-
-      const geometry2 = new THREE.BoxGeometry(10, 10, 10);
-
-      function createTextTexture(text) {
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-        canvas.width = 256;
-        canvas.height = 256;
-        context.fillStyle = "#FFFFFF";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.font = "24px Arial";
-        context.fillStyle = "black";
-        context.textAlign = "center";
-        context.textBaseline = "middle";
-        context.fillText(text, canvas.width / 2, canvas.height / 2);
-        const texture = new THREE.Texture(canvas);
-        texture.needsUpdate = true;
-        return texture;
-      }
-
-      function generateRandomColor() {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-
-      const universidadeTexture = createTextTexture("UNIVERSIDADE");
-      const projetosTexture = createTextTexture("PROJETOS");
-
-      const materialUniversidade = new THREE.MeshPhongMaterial({
-        map: universidadeTexture,
-        color: generateRandomColor(),
-      });
-
-      const materialProjetos = new THREE.MeshPhongMaterial({
-        map: projetosTexture,
-        color: generateRandomColor(),
-      });
-
-      const cube1 = new THREE.Mesh(geometry2, materialUniversidade);
-      cube1.position.x = -10;
-      scene.add(cube1);
-
-      const cube2 = new THREE.Mesh(geometry2, materialProjetos);
-      cube2.position.x = 10;
-      scene.add(cube2);
-
-      let lightAngle = 0;
-
-      const mouse = new THREE.Vector2();
-      const raycaster = new THREE.Raycaster();
-
-      function onMouseMove(event) {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      }
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        raycaster.setFromCamera(mouse, camera);
-
-        const intersects = raycaster.intersectObjects(scene.children);
-
-        scene.children.forEach((child) => {
-          if (child.isMesh) {
-            child.scale.set(1, 1, 1);
-          }
-        });
-
-        for (let i = 0; i < intersects.length; i++) {
-          intersects[i].object.scale.set(2, 2, 2);
-        }
-
-        cubes.forEach((cube) => {
-          cube.rotation.x += 0.01;
-          cube.rotation.y += 0.01;
-        });
-        cube1.rotation.x += 0.01;
-        cube1.rotation.y += 0.01;
-        cube2.rotation.x += 0.01;
-        cube2.rotation.y += 0.01;
-        lightAngle += 0.01;
-        light.position.x = 10 * Math.sin(lightAngle);
-        light.position.z = 10 * Math.cos(lightAngle);
-
-        renderer.render(scene, camera);
-      }
-
-      window.addEventListener("mousemove", onMouseMove, false);
-
-      animate();
-
-      window.addEventListener("resize", () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-    </script>
+    <div class="text">
+      <p class="ola">olá, eu sou o joão gaspar,</p>
+      <p class="estudante">
+        um estudante de engenharia de computadores e informática na universidade
+        de aveiro.
+      </p>
+      <p class="oquee">
+        este é o meu site pessoal, onde partilho um pouco da minha vida e dos
+        meus interesses.
+      </p>
+      <p class="agradecer">espero que gostes!</p>
+    </div>
+    <main>
+      <div class="grid-container" id="#photos">
+        <img src="/images/IMG-20240702-WA0001.jpg" alt="Foto1" />
+        <img src="/images/IMG-20240702-WA0002.jpg" alt="Foto2" />
+        <img src="/images/IMG-20240702-WA0003.jpg" alt="Foto3" />
+        <img src="/images/IMG-20240702-WA0004.jpg" alt="Foto4" />
+        <img src="/images/IMG-20240702-WA0005.jpg" alt="Foto5" />
+        <img src="/images/IMG-20240702-WA0006.jpg" alt="Foto6" />
+        <img src="/images/IMG-20240702-WA0007.jpg" alt="Foto7" />
+        <img src="/images/IMG-20240702-WA0008.jpg" alt="Foto8" />
+        <img src="/images/IMG-20240702-WA0009.jpg" alt="Foto9" />
+        <img src="/images/IMG-20240702-WA0010.jpg" alt="Foto10" />
+        <img src="/images/IMG-20240702-WA0011.jpg" alt="Foto11" />
+        <img src="/images/IMG-20240702-WA0012.jpg" alt="Foto12" />
+        <img src="/images/IMG-20240702-WA0013.jpg" alt="Foto13" />
+        <img src="/images/IMG-20240702-WA0014.jpg" alt="Foto14" />
+        <img src="/images/IMG-20240702-WA0015.jpg" alt="Foto15" />
+        <img src="/images/IMG-20240702-WA0016.jpg" alt="Foto16" />
+        <img src="/images/IMG-20240702-WA0017.jpg" alt="Foto17" />
+        <img src="/images/IMG-20240702-WA0018.jpg" alt="Foto18" />
+        <img src="/images/IMG-20240702-WA0019.jpg" alt="Foto19" />
+        <img src="/images/IMG-20240702-WA0020.jpg" alt="Foto20" />
+        <img src="/images/IMG-20240702-WA0021.jpg" alt="Foto21" />
+        <img src="/images/IMG-20240702-WA0022.jpg" alt="Foto22" />
+        <img src="/images/IMG-20240702-WA0023.jpg" alt="Foto23" />
+        <img src="/images/IMG-20240702-WA0024.jpg" alt="Foto24" />
+        <img src="/images/IMG-20240702-WA0025.jpg" alt="Foto25" />
+        <img src="/images/IMG-20240702-WA0026.jpg" alt="Foto26" />
+      </div>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>
+          entra em contato comigo através do e-mail:
+          <a href="mailto:j.gaspar@ua.pt">j.gaspar@ua.pt</a>
+        </p>
+      </div>
+      <div class="social-media">
+        <a href="https://www.instagram.com/joaogasparp/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://discordapp.com/users/380814629460246547"
+          target="_blank"
+          ><i class="fab fa-discord"></i
+        ></a>
+        <a href="https://www.linkedin.com/in/joaogasparp/" target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+      </div>
+      <div class="footer-content">
+        <p>
+          site hospedado no
+          <a
+            href="https://github.com/joaogasparp/joaogasparp.github.io"
+            target="_blank"
+            >github</a
+          >
+        </p>
+        <p>&copy; 2024 embarque</p>
+      </div>
+    </footer>
+    <script src="script.js"></script>
   </body>
 </html>

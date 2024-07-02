@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+main {
+  padding: 20px;
+  flex: 1;
+}
+
+/* ----------------------------------------------- */
+/* ----------- TEXT ------------ */
+
+.text {
+  margin: 10px 0;
+  margin-left: 30px;
+  color: #333;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.ola, .estudante, .oquee, .agradecer {
+  margin: 10px 0;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ola {
+  font-size: 24px;
+}
+
+.estudante {
+  font-size: 18px;
+}
+
+.oquee {
+  font-size: 18px;
+}
+
+.agradecer {
+  font-size: 16px;
+}
+
+/* ----------- TEXT ------------ */
+/* ----------------------------------------------- */
+/* ----------- GRID ------------ */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 10px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  grid-row-end: span 25;
+}
+
+/* ----------- GRID ------------ */
+/* ----------------------------------------------- */
+/* ----------- FOOTER ------------ */
+
+footer {
+  background-color: #e4e4e4;
+  padding: 25px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-content p,
+.social-media a {
+  margin: 10px 0;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-media a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 15px;
+  font-size: 24px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: #333;
+}
+
+.social-media a:hover {
+  transform: translateY(-5px);
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+.footer-content a {
+  background-color: #a7a7a7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-content a:hover {
+  background-color: #989898;
+  transform: translateY(-5px);
+}
+
+/* ----------- FOOTER ------------ */
+/* ----------------------------------------------- */
+
+@media (max-width: 600px) {
+  header nav ul li {
+    display: block;
+    margin: 20px 0;
+  }
+}
