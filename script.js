@@ -1,21 +1,12 @@
-let index = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  const iconMoon = themeToggle.querySelector(".fa-moon");
+  const iconSun = themeToggle.querySelector(".fa-sun");
 
-function showSlide(n) {
-  const slides = document.querySelectorAll(".carousel-image");
-  if (n >= slides.length) index = 0;
-  if (n < 0) index = slides.length - 1;
-
-  slides.forEach((slide, i) => {
-    slide.style.display = i === index ? "block" : "none";
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+    const isDarkMode = document.body.classList.contains("dark-theme");
+    iconMoon.style.display = isDarkMode ? "none" : "inline-block";
+    iconSun.style.display = isDarkMode ? "inline-block" : "none";
   });
-}
-
-document.querySelector(".prev").addEventListener("click", () => {
-  showSlide(--index);
 });
-
-document.querySelector(".next").addEventListener("click", () => {
-  showSlide(++index);
-});
-
-showSlide(index);
