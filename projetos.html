@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>embarque</title>
+    <title>:)</title>
     <link rel="icon" href="blacksquare_102672.ico" />
     <link
       rel="stylesheet"
@@ -15,7 +15,8 @@
     <div class="text">
       <p class="ola">projetos</p>
       <p class="oquee">
-        aqui estão alguns dos projetos em que trabalhei ao longo do tempo.
+        aqui estão alguns dos projetos em que trabalhei ao longo do tempo (não
+        estão por ordem).
       </p>
       <button id="theme-toggle">
         <i class="fas fa-moon"></i>
@@ -27,22 +28,86 @@
     </div>
     <main>
       <div class="grid-container" id="projects">
-        <div class="project">
-          <h3>projeto 1</h3>
-          <p>descrição do projeto 1...</p>
-        </div>
-        <div class="project">
-          <h3>projeto 2</h3>
-          <p>descrição do projeto 2...</p>
-        </div>
-        <div class="project">
-          <h3>projeto 3</h3>
-          <p>descrição do projeto 3...</p>
-        </div>
-        <div class="project">
-          <h3>projeto 4</h3>
-          <p>descrição do projeto 4...</p>
-        </div>
+        <p class="ola">projetos universidade</p>
+        <section class="project-section">
+          <div class="project">
+            <h3>projeto 1</h3>
+            <p class="project-description">
+              o objetivo deste projeto é desenvolver uma aplicação web online
+              que armazena e visualiza imagens originais de forma segura e que
+              faz o acompanhamento das transações digitais entre os
+              colecionadores. a aplicação principal tem como módulo principal o
+              cherrypy, que responde corretamente aos pedidos realizados pelo
+              utilizador da aplicação.
+            </p>
+            <button class="read-more-btn" onclick="toggleReadMore(this)">
+              ver mais...
+            </button>
+            <button
+              class="home-btn"
+              id="projects-btn"
+              onclick="window.location.href='https://github.com/joaogasparp/ua-li-webapp/tree/main/final-project'"
+            >
+              ver
+            </button>
+          </div>
+          <div class="project">
+            <h3>projeto 2</h3>
+            <p class="project-description">
+              este projeto foi realizado na cadeira de introdução à engenharia
+              informática. o objetivo era a criação de um site web sobre um
+              relatório feito anteriormente, juntamente com o que aprendemos nas
+              aulas.
+            </p>
+            <button class="read-more-btn" onclick="toggleReadMore(this)">
+              ver mais...
+            </button>
+            <button
+              class="home-btn"
+              id="projects-btn"
+              onclick="window.location.href='https://github.com/joaogasparp/ua-iei-latexwebproj/tree/main/final-project'"
+            >
+              ver
+            </button>
+          </div>
+
+          <div class="project">
+            <h3>projeto 3</h3>
+            <p class="project-description">descrição do projeto 3...</p>
+            <button
+              class="home-btn"
+              id="projects-btn"
+              onclick="window.location.href='https://github.com/joaogasparp'"
+            >
+              ver
+            </button>
+          </div>
+          <div class="project">
+            <h3>projeto 4</h3>
+            <p class="project-description">descrição do projeto 4...</p>
+            <button
+              class="home-btn"
+              id="projects-btn"
+              onclick="window.location.href='https://github.com/joaogasparp'"
+            >
+              ver
+            </button>
+          </div>
+        </section>
+        <p class="ola">projetos pessoais</p>
+        <section class="project-section">
+          <div class="project">
+            <h3>projeto n</h3>
+            <p class="project-description">descrição do projeto n...</p>
+            <button
+              class="home-btn"
+              id="projects-btn"
+              onclick="window.location.href=''"
+            >
+              ver
+            </button>
+          </div>
+        </section>
       </div>
     </main>
     <footer>
@@ -74,7 +139,7 @@
             >github</a
           >
         </p>
-        <p>&copy; 2024 embarque</p>
+        <p>&copy; 2024 :)</p>
       </div>
     </footer>
     <script src="script.js"></script>

@@ -28,3 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function toggleReadMore(button) {
+  const description = button.previousElementSibling;
+  if (description.classList.contains("expanded")) {
+    description.classList.remove("expanded");
+    button.textContent = "ver mais...";
+  } else {
+    description.classList.add("expanded");
+    button.textContent = "ver menos";
+  }
+}
