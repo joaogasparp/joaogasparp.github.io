@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,21 +10,116 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #ffffff;
-  color: #000000;
+  font-family: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  line-height: 1.6;
+  min-height: 100vh;
+  letter-spacing: -0.01em;
+}
+
+/* Corporate Typography */
+.heading-primary {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.heading-secondary {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.body-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
   line-height: 1.6;
 }
 
-/* Minimal styles */
-.minimal-card {
-  background: #ffffff;
-  border: 1px solid #e9ecef;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+.body-text-light {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #6b7280;
 }
 
-.minimal-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+/* Modern Navbar Styles */
+.navbar-modern {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-link {
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: #374151;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  background: #1a1a1a;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.navbar-link:hover {
+  color: #1a1a1a;
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+  width: 100%;
+}
+
+.navbar-link.active {
+  color: #1a1a1a;
+}
+
+/* Logo Styles */
+.logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+
+/* Social Links */
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.social-link:hover {
+  color: #1a1a1a;
+  border-color: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
 }
 
 /* Clean transitions */

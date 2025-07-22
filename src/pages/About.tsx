@@ -43,7 +43,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -135,9 +135,9 @@ const About: React.FC = () => {
                 <a
                   href="/cv_en.pdf"
                   download
-                  className="inline-flex items-center px-6 py-3 bg-black text-white hover:bg-gray-800 transition-colors duration-200"
+                  className="inline-flex items-center px-6 py-3 glass-button text-black hover:text-black transition-all duration-200"
                 >
-                  <FiDownload className="mr-2" size={18} />
+                  <FiDownload className="mr-2" size={16} />
                   <span>Download CV</span>
                 </a>
               </div>

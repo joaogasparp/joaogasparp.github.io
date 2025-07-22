@@ -141,7 +141,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -248,10 +248,10 @@ const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={status.type === 'loading'}
-                    className="w-full bg-black hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 transition-all duration-200 flex items-center justify-center space-x-2"
+                    className="w-full glass-button text-black hover:text-black disabled:opacity-50 disabled:cursor-not-allowed font-medium py-3 px-6 transition-all duration-200 flex items-center justify-center space-x-2"
                   >
                     {status.type === 'loading' ? (
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div>
                     ) : (
                       <>
                         <FiSend size={16} />

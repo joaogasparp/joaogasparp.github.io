@@ -1,129 +1,115 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FiGithub, FiLinkedin, FiMail, FiDownload, FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
 const Home: React.FC = () => {
-  const socialLinks = [
-    {
-      icon: FiGithub,
-      href: 'https://github.com/joaogasparp',
-      label: 'GitHub'
-    },
-    {
-      icon: FiLinkedin,
-      href: 'https://linkedin.com/in/joaogasparp/',
-      label: 'LinkedIn'
-    },
-    {
-      icon: FiMail,
-      href: 'mailto:joaogaspar003@gmail.com',
-      label: 'Email'
-    }
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
         type: 'spring' as const,
-        stiffness: 100,
-        damping: 15
+        stiffness: 80,
+        damping: 15,
       }
     }
   };
 
+  const socialLinks = [
+    {
+      name: 'GitHub',
+      icon: FiGithub,
+      url: 'https://github.com/joaogasparp',
+      label: 'GitHub Profile'
+    },
+    {
+      name: 'LinkedIn',
+      icon: FiLinkedin,
+      url: 'https://linkedin.com/in/joao-gaspar',
+      label: 'LinkedIn Profile'
+    },
+    {
+      name: 'Email',
+      icon: FiMail,
+      url: 'mailto:joaogaspar003@gmail.com',
+      label: 'Send Email'
+    }
+  ];
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <motion.div
-        className="max-w-4xl mx-auto text-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Name */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-4xl md:text-6xl font-light text-black mb-4 tracking-tight"
-        >
-          João Gaspar
-        </motion.h1>
-
-        {/* Title */}
-        <motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl text-gray-medium mb-8 font-light"
-        >
-          Engenheiro Informático e Telemático
-        </motion.p>
-
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="text-base text-gray-medium mb-12 max-w-2xl mx-auto leading-relaxed"
-        >
-          Versátil e proativo, focado em soluções técnicas estruturadas. 
-          Experiência em desenvolvimento web, desktop e práticas ágeis.
-        </motion.p>
-
-        {/* Buttons */}
+      <div className="max-w-4xl mx-auto text-center">
         <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6 mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <Link
-            to="/about"
-            className="group inline-flex items-center px-6 py-3 border border-black text-black hover:bg-black hover:text-white transition-all duration-200 font-medium"
+          {/* Greeting */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-6"
           >
-            <span>Saber Mais</span>
-            <FiArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-200" size={16} />
-          </Link>
-          
-          <a
-            href="/cv_en.pdf"
-            download
-            className="group inline-flex items-center px-6 py-3 bg-black text-white hover:bg-gray-800 transition-all duration-200 font-medium"
-          >
-            <FiDownload className="mr-2" size={16} />
-            <span>Download CV</span>
-          </a>
-        </motion.div>
+            <p className="body-text-light text-lg tracking-wide uppercase mb-4">
+              Hello, I'm
+            </p>
+          </motion.div>
 
-        {/* Social Links */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center space-x-8"
-        >
-          {socialLinks.map((link) => {
-            const Icon = link.icon;
-            return (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith('mailto:') ? '_self' : '_blank'}
-                rel="noopener noreferrer"
-                className="text-gray-medium hover:text-black transition-colors duration-200"
-                aria-label={link.label}
-              >
-                <Icon size={20} />
-              </a>
-            );
-          })}
+          {/* Name */}
+          <motion.h1
+            variants={itemVariants}
+            className="heading-primary text-5xl md:text-7xl text-black mb-6"
+          >
+            João
+          </motion.h1>
+
+          {/* Education & Location */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-12 space-y-2"
+          >
+            <p className="heading-secondary text-xl md:text-2xl text-gray-700">
+              Masters in Informatics and Telecommunications Engineering
+            </p>
+            <p className="body-text-light text-base tracking-wide uppercase">
+              Aveiro, Portugal
+            </p>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center justify-center space-x-6"
+          >
+            {socialLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  aria-label={link.label}
+                >
+                  <Icon size={20} />
+                </a>
+              );
+            })}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };
