@@ -75,8 +75,6 @@ const Experience: React.FC = () => {
 
   return (
     <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
-      {/* Accent color bar */}
-      <div className="w-16 h-2 rounded-full mb-8 mx-auto" style={{ background: '#10b981' }} />
       <div className="max-w-4xl mx-auto">
         <motion.div
           variants={containerVariants}

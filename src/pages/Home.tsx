@@ -8,21 +8,19 @@ const Home: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring' as const,
-        stiffness: 80,
-        damping: 15,
+        duration: 0.4,
       }
     }
   };
@@ -49,7 +47,9 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+      {/* Accent color bar */}
+      <div className="w-16 h-2 rounded-full mb-8" style={{ background: '#3b82f6' }} />
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           variants={containerVariants}

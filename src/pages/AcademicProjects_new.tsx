@@ -126,8 +126,6 @@ const AcademicProjects: React.FC = () => {
 
   return (
     <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
-      {/* Accent color bar */}
-      <div className="w-16 h-2 rounded-full mb-8 mx-auto" style={{ background: '#fbbf24' }} />
       <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
