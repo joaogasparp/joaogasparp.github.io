@@ -75,7 +75,7 @@ const Experience: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -84,20 +84,20 @@ const Experience: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={cardVariants} className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              <span className="text-primary">Experiência</span> Profissional
+            <h1 className="text-3xl md:text-4xl font-light text-black mb-4">
+              Experiência Profissional
             </h1>
-            <p className="text-white/70 text-lg max-w-3xl mx-auto">
+            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
               Percurso profissional marcado pela versatilidade, foco na qualidade e 
               constante aprendizagem em diferentes contextos e tecnologias.
             </p>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full mt-6"></div>
+            <div className="w-12 h-px bg-black mx-auto mt-6"></div>
           </motion.div>
 
           {/* Timeline */}
           <div className="relative">
             {/* Timeline Line */}
-            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/30 h-full"></div>
+            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-px bg-gray-200 h-full"></div>
 
             {/* Experience Cards */}
             <div className="space-y-12">
@@ -110,57 +110,57 @@ const Experience: React.FC = () => {
                   }`}
                 >
                   {/* Timeline Dot */}
-                  <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white/10 z-10"></div>
+                  <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-black border-4 border-white z-10"></div>
 
                   {/* Content */}
                   <div className={`lg:w-5/12 ${index % 2 === 0 ? 'lg:pr-8' : 'lg:pl-8'}`}>
-                    <div className="glass-card p-8 rounded-2xl">
+                    <div className="minimal-card p-6">
                       {/* Header */}
                       <div className="mb-6">
                         <div className="flex items-center justify-between mb-2">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          <span className={`px-3 py-1 text-xs font-medium border ${
                             exp.type === 'work' 
-                              ? 'bg-green-500/20 text-green-300' 
-                              : 'bg-blue-500/20 text-blue-300'
+                              ? 'bg-green-50 text-green-800 border-green-200' 
+                              : 'bg-blue-50 text-blue-800 border-blue-200'
                           }`}>
                             {exp.type === 'work' ? 'Emprego' : 'Freelance'}
                           </span>
-                          <div className="flex items-center text-white/60 text-sm">
+                          <div className="flex items-center text-gray-400 text-sm">
                             <FiCalendar size={14} className="mr-1" />
                             {exp.period}
                           </div>
                         </div>
 
-                        <h3 className="text-2xl font-bold text-white mb-2">
+                        <h3 className="text-lg font-medium text-black mb-2">
                           {exp.title}
                         </h3>
 
-                        <div className="flex items-center text-primary font-medium text-lg mb-2">
-                          <FiBriefcase size={18} className="mr-2" />
+                        <div className="flex items-center text-black font-medium mb-2">
+                          <FiBriefcase size={16} className="mr-2" />
                           {exp.company}
                         </div>
 
-                        <div className="flex items-center text-white/60 text-sm">
+                        <div className="flex items-center text-gray-500 text-sm">
                           <FiMapPin size={14} className="mr-1" />
                           {exp.location}
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-white/80 leading-relaxed mb-6">
+                      <p className="text-gray-600 leading-relaxed mb-6">
                         {exp.description}
                       </p>
 
                       {/* Achievements */}
                       <div className="mb-6">
-                        <h4 className="text-white font-semibold mb-3 flex items-center">
-                          <FiTrendingUp className="mr-2 text-primary" size={18} />
+                        <h4 className="text-black font-medium mb-3 flex items-center">
+                          <FiTrendingUp className="mr-2 text-black" size={16} />
                           Principais Conquistas
                         </h4>
                         <ul className="space-y-2">
                           {exp.achievements.map((achievement, i) => (
-                            <li key={i} className="flex items-start text-white/70 text-sm">
-                              <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                            <li key={i} className="flex items-start text-gray-600 text-sm">
+                              <div className="w-2 h-2 bg-black mr-3 mt-2 flex-shrink-0"></div>
                               {achievement}
                             </li>
                           ))}
@@ -169,15 +169,15 @@ const Experience: React.FC = () => {
 
                       {/* Technologies */}
                       <div>
-                        <h4 className="text-white font-semibold mb-3 flex items-center">
-                          <FiCode className="mr-2 text-primary" size={18} />
+                        <h4 className="text-black font-medium mb-3 flex items-center">
+                          <FiCode className="mr-2 text-black" size={16} />
                           Tecnologias Utilizadas
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {exp.technologies.map((tech) => (
                             <span
                               key={tech}
-                              className="px-2 py-1 bg-primary/20 text-primary text-xs rounded-full"
+                              className="px-2 py-1 bg-gray-100 text-gray-700 text-xs border"
                             >
                               {tech}
                             </span>
@@ -196,40 +196,40 @@ const Experience: React.FC = () => {
 
           {/* Summary */}
           <motion.div variants={cardVariants} className="mt-16">
-            <div className="glass-card p-8 rounded-2xl text-center">
-              <FiUsers className="mx-auto mb-4 text-primary" size={48} />
-              <h2 className="text-2xl font-bold text-white mb-4">
+            <div className="minimal-card p-8 text-center">
+              <FiUsers className="mx-auto mb-4 text-black" size={48} />
+              <h2 className="text-xl font-medium text-black mb-4">
                 Competências Desenvolvidas
               </h2>
-              <p className="text-white/70 leading-relaxed max-w-3xl mx-auto mb-8">
+              <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto mb-8">
                 A experiência profissional permitiu desenvolver não apenas competências técnicas sólidas, 
                 mas também capacidades essenciais como gestão de projetos, comunicação com clientes 
                 e adaptação a diferentes contextos de trabalho.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <FiBriefcase className="text-primary" size={24} />
+                  <div className="w-16 h-16 bg-gray-100 border flex items-center justify-center mx-auto mb-3">
+                    <FiBriefcase className="text-black" size={20} />
                   </div>
-                  <h3 className="text-white font-semibold">Gestão de Projetos</h3>
+                  <h3 className="text-black font-medium">Gestão de Projetos</h3>
                 </div>
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <FiUsers className="text-primary" size={24} />
+                  <div className="w-16 h-16 bg-gray-100 border flex items-center justify-center mx-auto mb-3">
+                    <FiUsers className="text-black" size={20} />
                   </div>
-                  <h3 className="text-white font-semibold">Relacionamento com Clientes</h3>
+                  <h3 className="text-black font-medium">Relacionamento com Clientes</h3>
                 </div>
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <FiCode className="text-primary" size={24} />
+                  <div className="w-16 h-16 bg-gray-100 border flex items-center justify-center mx-auto mb-3">
+                    <FiCode className="text-black" size={20} />
                   </div>
-                  <h3 className="text-white font-semibold">Desenvolvimento Técnico</h3>
+                  <h3 className="text-black font-medium">Desenvolvimento Técnico</h3>
                 </div>
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <FiTrendingUp className="text-primary" size={24} />
+                  <div className="w-16 h-16 bg-gray-100 border flex items-center justify-center mx-auto mb-3">
+                    <FiTrendingUp className="text-black" size={20} />
                   </div>
-                  <h3 className="text-white font-semibold">Melhoria Contínua</h3>
+                  <h3 className="text-black font-medium">Melhoria Contínua</h3>
                 </div>
               </div>
             </div>
