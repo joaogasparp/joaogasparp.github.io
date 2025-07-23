@@ -27,6 +27,129 @@ const AcademicProjects: React.FC = () => {
 
   const projects = [
     {
+      title: "Dine&Dash: Food Delivery Platform",
+      course: "Engenharia e Gestão de Serviços",
+      period: "2025",
+      description: "Development of a distributed food delivery platform with microservices architecture, including authentication, payment, route optimization, and real-time tracking.",
+      technologies: ["Python", "JavaScript", "React", "FastAPI", "Docker", "Kubernetes"],
+      features: [
+        "User authentication and authorization service",
+        "Payment processing microservice",
+        "Route optimization using A* algorithm",
+        "Real-time courier and order tracking",
+        "Microservices communication and orchestration",
+        "Containerization and deployment with Docker and Kubernetes"
+      ],
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/EGS/Projeto",
+      demo: "",
+      teamSize: "3 members"
+    },
+    {
+      "title": "Canny Edge Detector with CUDA Programming",
+      "course": "Computação em Larga Escala",
+      "period": "2025",
+      "description": "Implementação de algoritmos de detecção de bordas em imagens utilizando CUDA para processamento paralelo em GPU, com foco em desempenho e otimização.",
+      "technologies": ["CUDA", "C", "Makefile", "Shell Script"],
+      "features": [
+        "Detecção de bordas com algoritmo de Canny",
+        "Implementações otimizadas para GPU (CUDA)",
+        "Scripts de teste e deploy automatizados",
+        "Processamento eficiente de imagens em lote"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/blob/main/CLE/Projetos/cle_proj3",
+      "demo": "",
+      "teamSize": "3 membros"
+    },
+    {
+      "title": "Single-Threaded to Distributed-Memory Using MPI",
+      "course": "Computação em Larga Escala",
+      "period": "2025",
+      "description": "Desenvolvimento de aplicações paralelas e distribuídas para processamento de texto e análise de dados meteorológicos, utilizando MPI e abordagens single-threaded.",
+      "technologies": ["C++", "MPI", "CMake", "Makefile"],
+      "features": [
+        "Contagem de palavras em grandes volumes de texto com MPI",
+        "Processamento distribuído e paralelização de tarefas",
+        "Análise de dados de estações meteorológicas",
+        "Implementações comparativas: single-threaded e MPI"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/CLE/Projetos/cle_proj2",
+      "demo": "",
+      "teamSize": "3 membros"
+    },
+    {
+      "title": "Single-Threaded to Multi-Threaded Using C++",
+      "course": "Computação em Larga Escala",
+      "period": "2025",
+      "description": "Implementação de aplicações para processamento de texto e análise de dados meteorológicos, utilizando abordagens single-threaded e multi-threaded.",
+      "technologies": ["C++", "POSIX Threads", "CMake", "Makefile"],
+      "features": [
+        "Contagem de palavras em grandes volumes de texto",
+        "Processamento multi-threaded para desempenho otimizado",
+        "Análise de dados de estações meteorológicas",
+        "Estrutura modular com diferentes modos de execução"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/CLE/Projetos/cle_proj1",
+      "demo": "",
+      "teamSize": "3 membros"
+    },
+    {
+      title: "Network Traffic Analysis Project",
+      course: "Computer Networks",
+      period: "2025",
+      description: "Analysis and classification of network traffic using real-world datasets and geolocation data to identify patterns and anomalies.",
+      technologies: ["Python", "Pandas", "Parquet", "GeoLite2"],
+      features: [
+        "Processing and analysis of large network traffic datasets",
+        "Integration with GeoLite2 for IP geolocation",
+        "Data visualization and reporting in Jupyter Notebook",
+        "Support for multiple data formats (Parquet)"
+      ],
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/SRC/Projetos/src_proj2",
+      demo: "",
+      teamSize: "1"
+    },
+    {
+      "title": "Redundant Network Security and Load Balancing Project",
+      "course": "Segurança em Redes de Comunicações",
+      "period": "2025",
+      "description": "Configuration and operational testing of a network with redundant load-balancers and firewalls, implementing security policies for DMZ, internal datacenter, and VLANs using GNS3.",
+      "technologies": [
+        "GNS3",
+        "Load Balancer",
+        "VLANs",
+        "Network Routing",
+        "Firewall Synchronization"
+      ],
+      "features": [
+        "Redundant firewall and load-balancer deployment",
+        "Network routing and connectivity for multiple VLANs and zones",
+        "Firewall state synchronization for high availability",
+        "Definition of security zones and inter-zone rules",
+        "Implementation of security policies (DDoS mitigation, service restrictions, access controls)",
+        "Operational tests and validation of network policies"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/SRC/Projetos/src_proj1",
+      "demo": "",
+      "teamSize": "1 member"
+    },
+    {
+      title: "IoT Environmental Monitoring System",
+      course: "Arquiteturas para Sistemas Embebidos",
+      period: "2025",
+      description: "Sistema distribuído para monitorização ambiental usando sensores ESP32, comunicação ESP-NOW e dashboard web para visualização em tempo real.",
+      technologies: ["ESP32", "C", "Python", "React", "Node.js", "ESP-NOW"],
+      features: [
+        "Leitura de sensores ambientais (temperatura, humidade, pressão)",
+        "Comunicação sem fio entre dispositivos via ESP-NOW",
+        "Dashboard web interativo para visualização de dados",
+        "Recomendações automáticas baseadas nos dados recolhidos",
+        "Monitorização do estado da ligação e configuração do servidor"
+      ],
+      github: "",
+      demo: "",
+      teamSize: "2 membros"
+    },
+    {
       "title": "Traffic Engineering of Telecommunication Networks",
       "course": "Modelação e Desempenho de Redes e Sistemas",
       "period": "2024",
