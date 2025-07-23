@@ -27,8 +27,151 @@ const AcademicProjects: React.FC = () => {
 
   const projects = [
     {
+      "title": "Traffic Engineering of Telecommunication Networks",
+      "course": "Modelação e Desempenho de Redes e Sistemas",
+      "period": "2024",
+      "description": "Análise e otimização de redes de telecomunicações, incluindo cálculo de cargas em ligações, estratégias de roteamento e avaliação de desempenho usando diferentes algoritmos.",
+      "technologies": ["MATLAB"],
+      "features": [
+        "Cálculo de cargas em ligações de rede",
+        "Implementação de algoritmos de caminhos mais curtos (k-Shortest Path)",
+        "Estratégias de roteamento: Greedy Randomized e Hill Climbing",
+        "Simulação e análise de desempenho de redes"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/MDRS/Projetos/mdrs_proj2",
+      "demo": "",
+      "teamSize": "2"
+    },
+    {
+      title: "Performance Evaluation of Point-to-Point Links Supporting Packet Services",
+      course: "Modelação e Desempenho de Redes e Serviços",
+      period: "2024",
+      description: "Análise de desempenho de redes de comunicação através de simulações e estudo de métricas como atraso, perda de pacotes e throughput.",
+      technologies: ["MATLAB"],
+      features: [
+        "Simulação de redes de comunicação",
+        "Avaliação de atraso, perda e throughput",
+        "Geração de gráficos de desempenho",
+        "Estudo de diferentes cenários de rede"
+      ],
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/MDRS/Projetos/mdrs_proj1",
+      demo: "",
+      teamSize: "2"
+    },
+    {
+      title: "CDN Network Design and Simulation",
+      course: "Arquiteturas de Comunicação",
+      period: "2024",
+      description: "Technical design, configuration, and testing of a CDN network with multiple enterprise and SME clients, simulating Points of Presence (PoPs) in Porto, Lisboa, Barcelona, and Chicago. The project includes private networking, traffic engineering, advanced service routing, and SNMP monitoring.",
+      technologies: ["GNS3", "Cisco C7200", "VyOS", "MPLS VPN", "VXLAN", "BGP", "SNMP", "Wireshark"],
+      features: [
+        "Core network assembly and connectivity with Cisco C7200 routers",
+        "Private MPLS VPN for SME association with bandwidth guarantees",
+        "Advanced service routing for CDN clusters",
+        "Layer 2 Ethernet private network for enterprise client with traffic differentiation (QoS)",
+        "Traffic engineering with guaranteed bandwidth channels",
+        "SNMP monitoring tool for Cisco routers (model, memory, interfaces, traffic load)",
+      ],
+      github: "",
+      demo: "",
+      teamSize: "2 members"
+    },
+    {
+      "title": "Accumulator Pipeline Architectures",
+      "course": "Arquiteturas de Alto Desempenho",
+      "period": "2024",
+      "description": "Design and simulation of accumulator architectures in VHDL, including pipelined and single-cycle versions, with and without integrated barrel shifters.",
+      "technologies": [
+        "VHDL",
+        "ModelSim",
+        "FPGA Design"
+      ],
+      "features": [
+        "Pipelined accumulator implementation",
+        "Single-cycle accumulator design",
+        "Barrel shifter integration",
+        "Testbenches for functional verification",
+        "Modular arithmetic components (adder, and/or/xor gates, dual-port RAM)"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/AAD/Projetos/aad_proj2",
+      "demo": "",
+      "teamSize": "2 members"
+    },
+    {
+      "title": "DETI Coins Search Project",
+      "course": "Arquiteturas de Alto Desempenho",
+      "period": "2024",
+      "description": "Implementation and optimization of algorithms for searching and validating DETI coins using CPU (AVX, AVX2, special instructions), CUDA, and WebAssembly.",
+      "technologies": [
+        "C",
+        "CUDA",
+        "OpenCL",
+        "AVX/AVX2",
+        "WebAssembly"
+      ],
+      "features": [
+        "Parallel search algorithms for DETI coins",
+        "CPU and GPU (CUDA) acceleration",
+        "AVX/AVX2 vectorized search",
+        "WebAssembly support for browser execution",
+        "MD5 hash validation",
+        "Utilities for CPU and CUDA performance"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/AAD/Projetos/aad_proj1",
+      "demo": "",
+      "teamSize": "2 members"
+    },
+    {
+      "title": "Audio and Image Compression and Coding",
+      "course": "Informação e Codificação",
+      "period": "2024",
+      "description": "Projeto dedicado à implementação de algoritmos de compressão de áudio, incluindo codificação e decodificação utilizando técnicas como Golomb coding e manipulação de bitstreams.",
+      "technologies": ["C++", "Makefile", "PPM", "WAV"],
+      "features": [
+        "Implementação de codificadores e decodificadores Golomb",
+        "Manipulação eficiente de bitstreams",
+        "Compressão e descompressão de arquivos de áudio",
+        "Testes automatizados para validação dos algoritmos"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/IC/Projetos/ic_proj2",
+      "demo": "",
+      "teamSize": "3 membro"
+    },
+    {
+      "title": "Multimodal Data Processing",
+      "course": "Informação e Codificação",
+      "period": "2024",
+      "description": "Projeto focado em manipulação e análise de dados multimodais, incluindo áudio, imagem e texto, com implementação de algoritmos básicos de processamento e visualização.",
+      "technologies": ["C++", "Makefile", "PPM", "WAV"],
+      "features": [
+        "Manipulação e processamento de arquivos de áudio (WAV)",
+        "Processamento e visualização de imagens (PPM)",
+        "Geração e análise de histogramas de texto",
+        "Estrutura modular para diferentes tipos de dados"
+      ],
+      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/IC/Projetos/ic_proj1",
+      "demo": "",
+      "teamSize": "3 membros"
+    },
+    {
+      title: "PDraw: Compiler",
+      course: "Compiladores",
+      period: "2024",
+      description: "Desenvolvimento de um compilador para a linguagem PDraw, permitindo a tradução de scripts gráficos em desenhos vetoriais.",
+      technologies: ["Java", "ANTLR", "Python"],
+      features: [
+        "Análise léxica e sintática com ANTLR",
+        "Geração de código intermediário",
+        "Execução de scripts gráficos",
+        "Suporte a múltiplos exemplos de entrada"
+      ],
+      github: "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/C/P/pdraw_project",
+      demo: "",
+      teamSize: "5 membros"
+    },
+    {
       title: "KeyVaults: Web Application",
-      course: "User Interface Design",
+      course: "Interação Humano-Computador",
       period: "2024",
       description: "Desenvolvimento de uma aplicação web de livraria gamificada, com quizzes, missões, loja virtual e integração de perfis de utilizador.",
       technologies: ["Python (Flask)", "HTML", "CSS", "JavaScript"],
