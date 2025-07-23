@@ -38,7 +38,7 @@ const About: React.FC = () => {
   ];
 
   const [skillIndex, setSkillIndex] = React.useState(0);
-  const skillsPerPage = 15; // 3 rows x 5 columns
+  const skillsPerPage = 20; // 4 rows x 5 columns
   React.useEffect(() => {
     const interval = setInterval(() => {
       setSkillIndex((prev) => (prev + skillsPerPage) % allSkills.length);
@@ -232,21 +232,43 @@ const About: React.FC = () => {
 
           {/* Skills Section */}
           <motion.div variants={itemVariants}>
-            <h2 className="heading-secondary text-2xl text-black mb-8 text-center">Technical Skills</h2>
-            <div className="grid grid-rows-3 grid-cols-5 gap-4">
-              {visibleSkills.map((skill, idx) => (
-                <motion.div
-                  key={skill + idx}
-                  variants={itemVariants}
-                  className="bg-gray-50 rounded-lg p-4 text-center border border-gray-100 hover:border-gray-200 transition-colors text-sm capitalize"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="body-text text-gray-700 font-medium">{skill}</span>
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Technical & Soft Skills Aligned Grid */}
+              <div className="flex flex-col h-full">
+                <h3 className="heading-secondary text-lg text-black mb-4 text-center md:text-left">Technical Skills</h3>
+                <div className="grid grid-rows-4 grid-cols-5 gap-4 h-full">
+                  {visibleSkills.map((skill, idx) => (
+                    <motion.div
+                      key={skill + idx}
+                      variants={itemVariants}
+                      className="bg-gray-50 rounded-lg p-4 flex items-center justify-center text-center border border-gray-100 hover:border-gray-200 transition-colors text-sm capitalize h-full"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="body-text text-gray-700 font-medium">{skill}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col h-full">
+                <h3 className="heading-secondary text-lg text-black mb-4 text-center md:text-left">Soft Skills</h3>
+                <div className="grid grid-rows-4 grid-cols-1 gap-4 h-full">
+                  <motion.div variants={itemVariants} className="bg-gray-50 rounded-lg p-4 flex items-center justify-center text-center border border-gray-100 text-gray-700 text-sm font-medium h-full">
+                    Effective communication and teamwork abilities
+                  </motion.div>
+                  <motion.div variants={itemVariants} className="bg-gray-50 rounded-lg p-4 flex items-center justify-center text-center border border-gray-100 text-gray-700 text-sm font-medium h-full">
+                    Strong organizational and planning skills
+                  </motion.div>
+                  <motion.div variants={itemVariants} className="bg-gray-50 rounded-lg p-4 flex items-center justify-center text-center border border-gray-100 text-gray-700 text-sm font-medium h-full">
+                    Critical thinking and proactivity
+                  </motion.div>
+                  <motion.div variants={itemVariants} className="bg-gray-50 rounded-lg p-4 flex items-center justify-center text-center border border-gray-100 text-gray-700 text-sm font-medium h-full">
+                    Adaptability to new environments and technologies
+                  </motion.div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>

@@ -28,7 +28,7 @@ const AcademicProjects: React.FC = () => {
   const projects = [
     {
       title: "Dine&Dash: Food Delivery Platform",
-      course: "Engenharia e Gestão de Serviços",
+      course: "Service Engineering and Management",
       period: "2025",
       description: "Development of a distributed food delivery platform with microservices architecture, including authentication, payment, route optimization, and real-time tracking.",
       technologies: ["Python", "JavaScript", "React", "FastAPI", "Docker", "Kubernetes"],
@@ -45,52 +45,52 @@ const AcademicProjects: React.FC = () => {
       teamSize: "3 members"
     },
     {
-      "title": "Canny Edge Detector with CUDA Programming",
-      "course": "Computação em Larga Escala",
-      "period": "2025",
-      "description": "Implementação de algoritmos de detecção de bordas em imagens utilizando CUDA para processamento paralelo em GPU, com foco em desempenho e otimização.",
-      "technologies": ["CUDA", "C", "Makefile", "Shell Script"],
-      "features": [
-        "Detecção de bordas com algoritmo de Canny",
-        "Implementações otimizadas para GPU (CUDA)",
-        "Scripts de teste e deploy automatizados",
-        "Processamento eficiente de imagens em lote"
+      title: "Canny Edge Detector with CUDA Programming",
+      course: "Large Scale Computing",
+      period: "2025",
+      description: "Implementation of edge detection algorithms in images using CUDA for parallel GPU processing, focusing on performance and optimization.",
+      technologies: ["CUDA", "C", "Makefile", "Shell Script"],
+      features: [
+        "Edge detection with the Canny algorithm",
+        "GPU-optimized implementations (CUDA)",
+        "Automated test and deployment scripts",
+        "Efficient batch image processing"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/blob/main/CLE/Projetos/cle_proj3",
-      "demo": "",
-      "teamSize": "3 membros"
+      github: "https://github.com/joaogasparp/mect_1ano/blob/main/CLE/Projetos/cle_proj3",
+      demo: "",
+      teamSize: "3 members"
     },
     {
-      "title": "Single-Threaded to Distributed-Memory Using MPI",
-      "course": "Computação em Larga Escala",
-      "period": "2025",
-      "description": "Desenvolvimento de aplicações paralelas e distribuídas para processamento de texto e análise de dados meteorológicos, utilizando MPI e abordagens single-threaded.",
-      "technologies": ["C++", "MPI", "CMake", "Makefile"],
-      "features": [
-        "Contagem de palavras em grandes volumes de texto com MPI",
-        "Processamento distribuído e paralelização de tarefas",
-        "Análise de dados de estações meteorológicas",
-        "Implementações comparativas: single-threaded e MPI"
+      title: "Single-Threaded to Distributed-Memory Using MPI",
+      course: "Large Scale Computing",
+      period: "2025",
+      description: "Development of parallel and distributed applications for text processing and meteorological data analysis, using MPI and single-threaded approaches.",
+      technologies: ["C++", "MPI", "CMake", "Makefile"],
+      features: [
+        "Word counting in large text volumes with MPI",
+        "Distributed processing and task parallelization",
+        "Analysis of meteorological station data",
+        "Comparative implementations: single-threaded and MPI"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/CLE/Projetos/cle_proj2",
-      "demo": "",
-      "teamSize": "3 membros"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/CLE/Projetos/cle_proj2",
+      demo: "",
+      teamSize: "3 members"
     },
     {
-      "title": "Single-Threaded to Multi-Threaded Using C++",
-      "course": "Computação em Larga Escala",
-      "period": "2025",
-      "description": "Implementação de aplicações para processamento de texto e análise de dados meteorológicos, utilizando abordagens single-threaded e multi-threaded.",
-      "technologies": ["C++", "POSIX Threads", "CMake", "Makefile"],
-      "features": [
-        "Contagem de palavras em grandes volumes de texto",
-        "Processamento multi-threaded para desempenho otimizado",
-        "Análise de dados de estações meteorológicas",
-        "Estrutura modular com diferentes modos de execução"
+      title: "Single-Threaded to Multi-Threaded Using C++",
+      course: "Large Scale Computing",
+      period: "2025",
+      description: "Implementation of applications for text processing and meteorological data analysis, using single-threaded and multi-threaded approaches.",
+      technologies: ["C++", "POSIX Threads", "CMake", "Makefile"],
+      features: [
+        "Word counting in large text volumes",
+        "Multi-threaded processing for optimized performance",
+        "Analysis of meteorological station data",
+        "Modular structure with different execution modes"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/CLE/Projetos/cle_proj1",
-      "demo": "",
-      "teamSize": "3 membros"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/CLE/Projetos/cle_proj1",
+      demo: "",
+      teamSize: "3 members"
     },
     {
       title: "Network Traffic Analysis Project",
@@ -109,77 +109,77 @@ const AcademicProjects: React.FC = () => {
       teamSize: "1"
     },
     {
-      "title": "Redundant Network Security and Load Balancing Project",
-      "course": "Segurança em Redes de Comunicações",
-      "period": "2025",
-      "description": "Configuration and operational testing of a network with redundant load-balancers and firewalls, implementing security policies for DMZ, internal datacenter, and VLANs using GNS3.",
-      "technologies": [
+      title: "Redundant Network Security and Load Balancing Project",
+      course: "Network Security",
+      period: "2025",
+      description: "Configuration and operational testing of a network with redundant load balancers and firewalls, implementing security policies for DMZ, internal datacenter, and VLANs using GNS3.",
+      technologies: [
         "GNS3",
         "Load Balancer",
         "VLANs",
         "Network Routing",
         "Firewall Synchronization"
       ],
-      "features": [
-        "Redundant firewall and load-balancer deployment",
+      features: [
+        "Redundant firewall and load balancer deployment",
         "Network routing and connectivity for multiple VLANs and zones",
         "Firewall state synchronization for high availability",
         "Definition of security zones and inter-zone rules",
         "Implementation of security policies (DDoS mitigation, service restrictions, access controls)",
         "Operational tests and validation of network policies"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/SRC/Projetos/src_proj1",
-      "demo": "",
-      "teamSize": "1 member"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/SRC/Projetos/src_proj1",
+      demo: "",
+      teamSize: "1 member"
     },
     {
       title: "IoT Environmental Monitoring System",
-      course: "Arquiteturas para Sistemas Embebidos",
+      course: "Embedded Systems Architectures",
       period: "2025",
-      description: "Sistema distribuído para monitorização ambiental usando sensores ESP32, comunicação ESP-NOW e dashboard web para visualização em tempo real.",
+      description: "Distributed system for environmental monitoring using ESP32 sensors, ESP-NOW communication, and a web dashboard for real-time visualization.",
       technologies: ["ESP32", "C", "Python", "React", "Node.js", "ESP-NOW"],
       features: [
-        "Leitura de sensores ambientais (temperatura, humidade, pressão)",
-        "Comunicação sem fio entre dispositivos via ESP-NOW",
-        "Dashboard web interativo para visualização de dados",
-        "Recomendações automáticas baseadas nos dados recolhidos",
-        "Monitorização do estado da ligação e configuração do servidor"
+        "Reading of environmental sensors (temperature, humidity, pressure)",
+        "Wireless communication between devices via ESP-NOW",
+        "Interactive web dashboard for data visualization",
+        "Automatic recommendations based on collected data",
+        "Monitoring of connection status and server configuration"
       ],
       github: "",
       demo: "",
-      teamSize: "2 membros"
+      teamSize: "2 members"
     },
     {
-      "title": "Traffic Engineering of Telecommunication Networks",
-      "course": "Modelação e Desempenho de Redes e Sistemas",
-      "period": "2024",
-      "description": "Análise e otimização de redes de telecomunicações, incluindo cálculo de cargas em ligações, estratégias de roteamento e avaliação de desempenho usando diferentes algoritmos.",
-      "technologies": ["MATLAB"],
-      "features": [
-        "Cálculo de cargas em ligações de rede",
-        "Implementação de algoritmos de caminhos mais curtos (k-Shortest Path)",
-        "Estratégias de roteamento: Greedy Randomized e Hill Climbing",
-        "Simulação e análise de desempenho de redes"
+      title: "Traffic Engineering of Telecommunication Networks",
+      course: "Network Modeling and Performance",
+      period: "2024",
+      description: "Analysis and optimization of telecommunication networks, including link load calculation, routing strategies, and performance evaluation using different algorithms.",
+      technologies: ["MATLAB"],
+      features: [
+        "Calculation of network link loads",
+        "Implementation of shortest path algorithms (k-Shortest Path)",
+        "Routing strategies: Greedy Randomized and Hill Climbing",
+        "Network simulation and performance analysis"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/MDRS/Projetos/mdrs_proj2",
-      "demo": "",
-      "teamSize": "2"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/MDRS/Projetos/mdrs_proj2",
+      demo: "",
+      teamSize: "2 members"
     },
     {
       title: "Performance Evaluation of Point-to-Point Links Supporting Packet Services",
-      course: "Modelação e Desempenho de Redes e Serviços",
+      course: "Network and Service Modeling and Performance",
       period: "2024",
-      description: "Análise de desempenho de redes de comunicação através de simulações e estudo de métricas como atraso, perda de pacotes e throughput.",
+      description: "Performance analysis of communication networks through simulations and study of metrics such as delay, packet loss, and throughput.",
       technologies: ["MATLAB"],
       features: [
-        "Simulação de redes de comunicação",
-        "Avaliação de atraso, perda e throughput",
-        "Geração de gráficos de desempenho",
-        "Estudo de diferentes cenários de rede"
+        "Simulation of communication networks",
+        "Evaluation of delay, loss, and throughput",
+        "Generation of performance graphs",
+        "Study of different network scenarios"
       ],
       github: "https://github.com/joaogasparp/mect_1ano/tree/main/MDRS/Projetos/mdrs_proj1",
       demo: "",
-      teamSize: "2"
+      teamSize: "2 members"
     },
     {
       title: "CDN Network Design and Simulation",
@@ -200,39 +200,39 @@ const AcademicProjects: React.FC = () => {
       teamSize: "2 members"
     },
     {
-      "title": "Accumulator Pipeline Architectures",
-      "course": "Arquiteturas de Alto Desempenho",
-      "period": "2024",
-      "description": "Design and simulation of accumulator architectures in VHDL, including pipelined and single-cycle versions, with and without integrated barrel shifters.",
-      "technologies": [
+      title: "Accumulator Pipeline Architectures",
+      course: "High Performance Architectures",
+      period: "2024",
+      description: "Design and simulation of accumulator architectures in VHDL, including pipelined and single-cycle versions, with and without integrated barrel shifters.",
+      technologies: [
         "VHDL",
         "ModelSim",
         "FPGA Design"
       ],
-      "features": [
+      features: [
         "Pipelined accumulator implementation",
         "Single-cycle accumulator design",
         "Barrel shifter integration",
         "Testbenches for functional verification",
         "Modular arithmetic components (adder, and/or/xor gates, dual-port RAM)"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/AAD/Projetos/aad_proj2",
-      "demo": "",
-      "teamSize": "2 members"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/AAD/Projetos/aad_proj2",
+      demo: "",
+      teamSize: "2 members"
     },
     {
-      "title": "DETI Coins Search Project",
-      "course": "Arquiteturas de Alto Desempenho",
-      "period": "2024",
-      "description": "Implementation and optimization of algorithms for searching and validating DETI coins using CPU (AVX, AVX2, special instructions), CUDA, and WebAssembly.",
-      "technologies": [
+      title: "DETI Coins Search Project",
+      course: "High Performance Architectures",
+      period: "2024",
+      description: "Implementation and optimization of algorithms for searching and validating DETI coins using CPU (AVX, AVX2, special instructions), CUDA, and WebAssembly.",
+      technologies: [
         "C",
         "CUDA",
         "OpenCL",
         "AVX/AVX2",
         "WebAssembly"
       ],
-      "features": [
+      features: [
         "Parallel search algorithms for DETI coins",
         "CPU and GPU (CUDA) acceleration",
         "AVX/AVX2 vectorized search",
@@ -240,129 +240,129 @@ const AcademicProjects: React.FC = () => {
         "MD5 hash validation",
         "Utilities for CPU and CUDA performance"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/AAD/Projetos/aad_proj1",
-      "demo": "",
-      "teamSize": "2 members"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/AAD/Projetos/aad_proj1",
+      demo: "",
+      teamSize: "2 members"
     },
     {
-      "title": "Audio and Image Compression and Coding",
-      "course": "Informação e Codificação",
-      "period": "2024",
-      "description": "Projeto dedicado à implementação de algoritmos de compressão de áudio, incluindo codificação e decodificação utilizando técnicas como Golomb coding e manipulação de bitstreams.",
-      "technologies": ["C++", "Makefile", "PPM", "WAV"],
-      "features": [
-        "Implementação de codificadores e decodificadores Golomb",
-        "Manipulação eficiente de bitstreams",
-        "Compressão e descompressão de arquivos de áudio",
-        "Testes automatizados para validação dos algoritmos"
+      title: "Audio and Image Compression and Coding",
+      course: "Information and Coding",
+      period: "2024",
+      description: "Project dedicated to the implementation of audio compression algorithms, including encoding and decoding using techniques such as Golomb coding and bitstream manipulation.",
+      technologies: ["C++", "Makefile", "PPM", "WAV"],
+      features: [
+        "Implementation of Golomb encoders and decoders",
+        "Efficient bitstream manipulation",
+        "Audio file compression and decompression",
+        "Automated tests for algorithm validation"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/IC/Projetos/ic_proj2",
-      "demo": "",
-      "teamSize": "3 membro"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/IC/Projetos/ic_proj2",
+      demo: "",
+      teamSize: "3 members"
     },
     {
-      "title": "Multimodal Data Processing",
-      "course": "Informação e Codificação",
-      "period": "2024",
-      "description": "Projeto focado em manipulação e análise de dados multimodais, incluindo áudio, imagem e texto, com implementação de algoritmos básicos de processamento e visualização.",
-      "technologies": ["C++", "Makefile", "PPM", "WAV"],
-      "features": [
-        "Manipulação e processamento de arquivos de áudio (WAV)",
-        "Processamento e visualização de imagens (PPM)",
-        "Geração e análise de histogramas de texto",
-        "Estrutura modular para diferentes tipos de dados"
+      title: "Multimodal Data Processing",
+      course: "Information and Coding",
+      period: "2024",
+      description: "Project focused on manipulation and analysis of multimodal data, including audio, image, and text, with implementation of basic processing and visualization algorithms.",
+      technologies: ["C++", "Makefile", "PPM", "WAV"],
+      features: [
+        "Manipulation and processing of audio files (WAV)",
+        "Processing and visualization of images (PPM)",
+        "Generation and analysis of text histograms",
+        "Modular structure for different data types"
       ],
-      "github": "https://github.com/joaogasparp/mect_1ano/tree/main/IC/Projetos/ic_proj1",
-      "demo": "",
-      "teamSize": "3 membros"
+      github: "https://github.com/joaogasparp/mect_1ano/tree/main/IC/Projetos/ic_proj1",
+      demo: "",
+      teamSize: "3 members"
     },
     {
       title: "PDraw: Compiler",
-      course: "Compiladores",
+      course: "Compilers",
       period: "2024",
-      description: "Desenvolvimento de um compilador para a linguagem PDraw, permitindo a tradução de scripts gráficos em desenhos vetoriais.",
+      description: "Development of a compiler for the PDraw language, enabling the translation of graphic scripts into vector drawings.",
       technologies: ["Java", "ANTLR", "Python"],
       features: [
-        "Análise léxica e sintática com ANTLR",
-        "Geração de código intermediário",
-        "Execução de scripts gráficos",
-        "Suporte a múltiplos exemplos de entrada"
+        "Lexical and syntactic analysis with ANTLR",
+        "Intermediate code generation",
+        "Execution of graphic scripts",
+        "Support for multiple input examples"
       ],
       github: "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/C/P/pdraw_project",
       demo: "",
-      teamSize: "5 membros"
+      teamSize: "5 members"
     },
     {
       title: "KeyVaults: Web Application",
-      course: "Interação Humano-Computador",
+      course: "Human-Computer Interaction",
       period: "2024",
-      description: "Desenvolvimento de uma aplicação web de livraria gamificada, com quizzes, missões, loja virtual e integração de perfis de utilizador.",
+      description: "Development of a gamified bookstore web application, with quizzes, missions, virtual store, and user profile integration.",
       technologies: ["Python (Flask)", "HTML", "CSS", "JavaScript"],
       features: [
-        "Sistema de login e registo de utilizadores",
-        "Quizzes interativos com feedback imediato",
-        "Loja virtual com carrinho de compras",
-        "Missões e recompensas gamificadas",
-        "Gestão de perfil de utilizador",
-        "Página de livestreams e integração de conteúdos multimédia"
+        "User login and registration system",
+        "Interactive quizzes with immediate feedback",
+        "Virtual store with shopping cart",
+        "Gamified missions and rewards",
+        "User profile management",
+        "Livestream page and multimedia content integration"
       ],
       github: "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/IHC/P/assignment2",
       demo: "",
-      teamSize: "3 membros"
+      teamSize: "3 members"
     },
     {
       title: "Dark Night: Game",
-      course: "Introdução à Computação Gráfica",
+      course: "Introduction to Computer Graphics",
       period: "2024",
-      description: "Desenvolvimento de uma experiência 3D interativa baseada em WebGL, com modelos, sons e interações em tempo real, simulando um ambiente noturno com elementos de terror.",
+      description: "Development of an interactive 3D experience based on WebGL, with models, sounds, and real-time interactions, simulating a night environment with horror elements.",
       technologies: ["JavaScript", "Three.js", "WebGL", "HTML5", "CSS3"],
       features: [
-        "Renderização 3D em tempo real com Three.js",
-        "Modelos 3D customizados (GLB/GLTF)",
-        "Ambiente sonoro imersivo",
-        "Interações com objetos e personagens",
-        "Efeitos visuais de iluminação e sombras",
-        "Interface web responsiva"
+        "Real-time 3D rendering with Three.js",
+        "Custom 3D models (GLB/GLTF)",
+        "Immersive sound environment",
+        "Interactions with objects and characters",
+        "Lighting and shadow visual effects",
+        "Responsive web interface"
       ],
       github: "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/ICG/projeto",
       demo: "",
-      teamSize: "1 membro"
+      teamSize: "1 member"
     },
     {
-      "title": "Gas Station: Management Application",
-      "course": "Base de Dados",
-      "period": "2024",
-      "description": "Aplicação desktop para gestão de um posto de combustível, incluindo funcionalidades de registo, login, gestão de funcionários, stocks, encomendas e perfis, com interface gráfica e integração com base de dados.",
-      "technologies": ["C#", ".NET Windows Forms", "SQL Server"],
-      "features": [
-        "Autenticação de utilizadores (login e registo)",
-        "Gestão de funcionários e perfis",
-        "Gestão de stocks de combustível",
-        "Criação e visualização de encomendas",
-        "Interface gráfica intuitiva",
-        "Integração com base de dados relacional",
-        "Documentação e apresentação do projeto"
+      title: "Gas Station: Management Application",
+      course: "Databases",
+      period: "2024",
+      description: "Desktop application for gas station management, including registration, login, employee, stock, order, and profile management, with graphical interface and database integration.",
+      technologies: ["C#", ".NET Windows Forms", "SQL Server"],
+      features: [
+        "User authentication (login and registration)",
+        "Employee and profile management",
+        "Fuel stock management",
+        "Order creation and visualization",
+        "Intuitive graphical interface",
+        "Integration with relational database",
+        "Project documentation and presentation"
       ],
-      "github": "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/BD/P/projeto/APFT_107708_107961",
-      "demo": "",
-      "teamSize": "2 membros"
+      github: "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/BD/P/projeto/APFT_107708_107961",
+      demo: "",
+      teamSize: "2 members"
     },
     {
-      "title": "Database Design and Modeling Project",
-      "course": "Base de Dados",
-      "period": "2024",
-      "description": "Projeto focado na análise, modelação e documentação de requisitos para um sistema de gestão de postos de combustível, incluindo diagramas ER, DER e documentação de requisitos.",
-      "technologies": ["SQL", "Modelagem ER", "Ferramentas de diagramas (Visio, PDF)"],
-      "features": [
-        "Levantamento e documentação de requisitos",
-        "Criação de diagramas Entidade-Relacionamento (ER)",
-        "Desenvolvimento de Diagramas de Entidade-Relacionamento Estendido (DER)",
-        "Documentação detalhada do esquema de dados",
-        "Geração de diagramas e documentação em múltiplos formatos (JPG, PDF, VSDX)"
+      title: "Database Design and Modeling Project",
+      course: "Databases",
+      period: "2024",
+      description: "Project focused on requirements analysis, modeling, and documentation for a gas station management system, including ER diagrams, EER diagrams, and requirements documentation.",
+      technologies: ["SQL", "ER Modeling", "Diagram tools (Visio, PDF)"],
+      features: [
+        "Requirements gathering and documentation",
+        "Creation of Entity-Relationship (ER) diagrams",
+        "Development of Enhanced Entity-Relationship (EER) diagrams",
+        "Detailed data schema documentation",
+        "Generation of diagrams and documentation in multiple formats (JPG, PDF, VSDX)"
       ],
-      "github": "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/BD/P/projeto/APFE_107708_107961",
-      "demo": "",
-      "teamSize": "2 members"
+      github: "https://github.com/joaogasparp/leci_3ano/tree/main/2semestre/BD/P/projeto/APFE_107708_107961",
+      demo: "",
+      teamSize: "2 members"
     },
     {
       title: "SO Memory Management Simulator",
@@ -383,178 +383,178 @@ const AcademicProjects: React.FC = () => {
       teamSize: "6 members"
     },
     {
-      "title": "DetiShop: Secure Web Application",
-      "course": "Segurança Informática e nas Comunicações",
-      "period": "2023",
-      "description": "Enhancement of the DetiShop e-commerce platform with advanced security features, including secure authentication, encrypted database, and compliance with security standards.",
-      "technologies": ["Python", "Flask", "SQLite", "HTML", "CSS", "JavaScript", "Bootstrap"],
-      "features": [
+      title: "DetiShop: Secure Web Application",
+      course: "Information and Communication Security",
+      period: "2023",
+      description: "Enhancement of the DetiShop e-commerce platform with advanced security features, including secure authentication, encrypted database, and compliance with security standards.",
+      technologies: ["Python", "Flask", "SQLite", "HTML", "CSS", "JavaScript", "Bootstrap"],
+      features: [
         "Secure user authentication and password management",
         "Encrypted database for sensitive data",
         "Role-based access control",
         "Security compliance checklist (ASVS)",
         "User activity logging and monitoring"
       ],
-      "github": "https://github.com/joaogasparp/leci_3ano/tree/main/1semestre/SIO/P/2nd-project-group_41",
-      "demo": "",
-      "teamSize": "4 members"
+      github: "https://github.com/joaogasparp/leci_3ano/tree/main/1semestre/SIO/P/2nd-project-group_41",
+      demo: "",
+      teamSize: "4 members"
     },
     {
-      "title": "DetiShop: Web Application",
-      "course": "Segurança Informática e nas Comunicações",
-      "period": "2023",
-      "description": "Development of an e-commerce web application for DETI, featuring user authentication, product catalog, shopping cart, and order management.",
-      "technologies": ["Python", "Flask", "SQLite", "HTML", "CSS", "JavaScript", "Bootstrap"],
-      "features": [
+      title: "DetiShop: Web Application",
+      course: "Information and Communication Security",
+      period: "2023",
+      description: "Development of an e-commerce web application for DETI, featuring user authentication, product catalog, shopping cart, and order management.",
+      technologies: ["Python", "Flask", "SQLite", "HTML", "CSS", "JavaScript", "Bootstrap"],
+      features: [
         "User registration and authentication",
         "Product browsing and search",
         "Shopping cart and checkout process",
         "Order history and user profiles",
         "Forum for user discussions"
       ],
-      "github": "https://github.com/joaogasparp/leci_3ano/tree/main/1semestre/SIO/P/1st-project-group_41-main",
-      "demo": "",
-      "teamSize": "4 members"
+      github: "https://github.com/joaogasparp/leci_3ano/tree/main/1semestre/SIO/P/1st-project-group_41-main",
+      demo: "",
+      teamSize: "4 members"
     },
     {
       title: "IA DigDug",
-      course: "Inteligência Artificial",
+      course: "Artificial Intelligence",
       period: "2023",
-      description: "Clone do clássico DigDug para ensino de IA, onde agentes inteligentes controlam o personagem principal enfrentando inimigos em um ambiente 2D. Inclui visualizador, servidor, cliente e agente AI customizável.",
+      description: "Clone of the classic DigDug for AI teaching, where intelligent agents control the main character facing enemies in a 2D environment. Includes viewer, server, client, and customizable AI agent.",
       technologies: ["Python", "Pygame", "Asyncio", "Websockets", "Flask", "SQLAlchemy"],
       features: [
-        "Agente AI customizável para jogar DigDug",
-        "Servidor de jogo assíncrono",
-        "Visualizador gráfico em tempo real com Pygame",
-        "Sistema de pontuação e ranking persistente (Flask + SQLite)",
-        "Interface web para visualização de scores",
-        "Suporte a múltiplos jogadores/instâncias"
+        "Customizable AI agent to play DigDug",
+        "Asynchronous game server",
+        "Real-time graphical viewer with Pygame",
+        "Persistent scoring and ranking system (Flask + SQLite)",
+        "Web interface for score visualization",
+        "Support for multiple players/instances"
       ],
       github: "https://github.com/joaogasparp/leci_3ano/tree/main/1semestre/IA/P/digdug",
       demo: "",
-      teamSize: "2 membros"
+      teamSize: "2 members"
     },
     {
       title: "PetsPortal: Mobile App",
-      course: "Análise de Sistemas",
+      course: "Systems Analysis",
       period: "2023",
-      description: "Aplicação mobile desenvolvida em Flutter para conectar donos de animais a petsitters, com funcionalidades de chat, localização, perfis e publicações.",
-      technologies: ["Flutter", "Dart", "Google Maps API", "HTTP", "SQLite (API Python Flask para backend)"],
+      description: "Mobile application developed in Flutter to connect pet owners to petsitters, with chat, location, profiles, and posting features.",
+      technologies: ["Flutter", "Dart", "Google Maps API", "HTTP", "SQLite (Python Flask API for backend)"],
       features: [
-        "Login e registo de utilizadores",
-        "Chat entre utilizadores e petsitters",
-        "Mapa interativo para localização de petsitters",
-        "Perfis personalizados para utilizadores e petsitters",
-        "Publicação de fotos e mensagens",
-        "Integração com backend em Python Flask"
+        "User login and registration",
+        "Chat between users and petsitters",
+        "Interactive map for locating petsitters",
+        "Custom profiles for users and petsitters",
+        "Photo and message posting",
+        "Integration with Python Flask backend"
       ],
       github: "https://github.com/joaogasparp/leci_2ano/tree/main/2semestre/AS/P/Projeto",
       demo: "",
-      teamSize: "4 membros"
+      teamSize: "4 members"
     },
     {
-      title: "Word Ladder: Busca e Transformação de Palavras",
-      course: "Algoritmos e Estruturas de Dados",
+      title: "Word Ladder: Word Search and Transformation",
+      course: "Algorithms and Data Structures",
       period: "2022",
-      description: "Desenvolvimento de uma solução para o problema Word Ladder, utilizando algoritmos de busca e manipulação eficiente de listas de palavras.",
+      description: "Development of a solution for the Word Ladder problem, using search algorithms and efficient manipulation of word lists.",
       technologies: ["C", "Makefile"],
       features: [
-        "Implementação do algoritmo Word Ladder",
-        "Leitura e processamento de grandes listas de palavras",
-        "Otimização de busca entre palavras",
-        "Automação de compilação e execução com Makefile"
+        "Implementation of the Word Ladder algorithm",
+        "Reading and processing of large word lists",
+        "Optimized word search",
+        "Automated compilation and execution with Makefile"
       ],
       github: "https://github.com/joaogasparp/leci_2ano/tree/main/1semestre/AED/TA2",
       demo: "",
-      teamSize: "3 membros"
+      teamSize: "3 members"
     },
     {
-      title: "Análise de Algoritmos e Geração de Gráficos",
-      course: "Algoritmos e Estruturas de Dados",
+      title: "Algorithm Analysis and Graph Generation",
+      course: "Algorithms and Data Structures",
       period: "2022",
-      description: "Projeto focado na análise de desempenho de algoritmos clássicos, geração de gráficos comparativos e otimização de código em C.",
+      description: "Project focused on the performance analysis of classic algorithms, generation of comparative graphs, and code optimization in C.",
       technologies: ["C", "Makefile", "MATLAB"],
       features: [
-        "Implementação e análise de algoritmos clássicos",
-        "Medição de tempo de execução dos algoritmos",
-        "Geração automática de gráficos de desempenho",
-        "Automação de compilação e testes com Makefile"
+        "Implementation and analysis of classic algorithms",
+        "Measurement of algorithm execution time",
+        "Automatic generation of performance graphs",
+        "Automated compilation and testing with Makefile"
       ],
       github: "https://github.com/joaogasparp/leci_2ano/tree/main/1semestre/AED/TA1",
       demo: "",
-      teamSize: "3 membros"
+      teamSize: "3 members"
     },
     {
-      "title": "Contador de Ténis Digital",
-      "course": "Laboratórios de Sistemas Digitais",
-      "period": "2022",
-      "description": "Implementação de um sistema digital completo para contagem e gestão de jogos de ténis, incluindo lógica de jogo, sets, tie-break e interface com displays.",
-      "technologies": ["VHDL", "Quartus", "FPGA"],
-      "features": [
-        "FSMs para gestão de jogos, sets e tie-break",
-        "Divisores de clock e debounce de botões",
-        "Decodificador para display de 7 segmentos",
-        "Testbenches para validação das FSMs",
-        "Relatório técnico detalhado e documentação"
-      ],
-      "github": "https://github.com/joaogasparp/leci_1ano/tree/main/2semestre/LSD/P/ProjetoFinal",
-      "demo": "",
-      "teamSize": "2 membros"
-    },
-    {
-      "title": "Temporizador Digital",
-      "course": "Laboratórios de Sistemas Digitais",
-      "period": "2022",
-      "description": "Desenvolvimento de um temporizador digital em VHDL, incluindo contadores, divisores de frequência e decodificadores para display de 7 segmentos.",
-      "technologies": ["VHDL", "Quartus", "FPGA"],
-      "features": [
-        "Contador decrescente de 16 valores",
-        "Divisor de frequência configurável",
-        "Geração de sinais de blink",
-        "Decodificador para display de 7 segmentos",
-        "Testbench para validação funcional"
-      ],
-      "github": "https://github.com/joaogasparp/leci_1ano/tree/main/2semestre/LSD/P/Mini-Projeto",
-      "demo": "",
-      "teamSize": "2 membros"
-    },
-    {
-      title: "Caderneta de Cromos Digital",
-      course: "Laboratórios de Informática",
+      title: "Digital Tennis Counter",
+      course: "Digital Systems Laboratories",
       period: "2022",
-      description: "Desenvolvimento de uma aplicação web para gestão de coleções de cromos, com autenticação de utilizadores, uploads de imagens, e interface moderna responsiva.",
+      description: "Implementation of a complete digital system for tennis match counting and management, including game logic, sets, tie-break, and display interface.",
+      technologies: ["VHDL", "Quartus", "FPGA"],
+      features: [
+        "FSMs for match, set, and tie-break management",
+        "Clock dividers and button debounce",
+        "Decoder for 7-segment display",
+        "Testbenches for FSM validation",
+        "Detailed technical report and documentation"
+      ],
+      github: "https://github.com/joaogasparp/leci_1ano/tree/main/2semestre/LSD/P/ProjetoFinal",
+      demo: "",
+      teamSize: "2 members"
+    },
+    {
+      title: "Digital Timer",
+      course: "Digital Systems Laboratories",
+      period: "2022",
+      description: "Development of a digital timer in VHDL, including counters, frequency dividers, and decoders for 7-segment display.",
+      technologies: ["VHDL", "Quartus", "FPGA"],
+      features: [
+        "16-value countdown counter",
+        "Configurable frequency divider",
+        "Blink signal generation",
+        "Decoder for 7-segment display",
+        "Testbench for functional validation"
+      ],
+      github: "https://github.com/joaogasparp/leci_1ano/tree/main/2semestre/LSD/P/Mini-Projeto",
+      demo: "",
+      teamSize: "2 members"
+    },
+    {
+      title: "Digital Sticker Album",
+      course: "Computer Laboratories",
+      period: "2022",
+      description: "Development of a web application for managing sticker collections, with user authentication, image uploads, and a modern responsive interface.",
       technologies: ["Python", "CherryPy", "SQLite", "HTML", "CSS", "JavaScript", "jQuery"],
-      features: ["Registo, login e logout de utilizadores com tokens", "Gestão de coleções e cromos com uploads de imagens", "Validação de tokens e permissões de acesso", "Interface responsiva e navegação dinâmica", "Integração com base de dados SQLite"],
+      features: ["User registration, login, and logout with tokens", "Collection and sticker management with image uploads", "Token validation and access permissions", "Responsive interface and dynamic navigation", "Integration with SQLite database"],
       github: "https://github.com/joaogasparp/leci_1ano/tree/main/2semestre/LI/TrabalhoFinal/labi2022g10",
       demo: "",
       teamSize: "4 members"
     },
     {
       title: "TCP Client-Server Communication Library",
-      course: "Laboratórios de Informática",
+      course: "Computer Laboratories",
       period: "2022",
-      description: "Implementação de funções universais para comunicação entre cliente e servidor via sockets TCP, com suporte a envio e receção de mensagens em formato JSON e tratamento de erros.",
+      description: "Implementation of universal functions for client-server communication via TCP sockets, supporting sending and receiving messages in JSON format and error handling.",
       technologies: ["Python", "Sockets", "JSON"],
-      features: ["Envio e receção exata de dados em sockets TCP", "Transmissão de dicionários como objetos JSON com prefixo de tamanho", "Funções universais para comunicação robusta", "Gestão de erros de transmissão"],
+      features: ["Exact sending and receiving of data over TCP sockets", "Transmission of dictionaries as JSON objects with length prefix", "Universal functions for robust communication", "Transmission error handling"],
       github: "https://github.com/joaogasparp/leci_1ano/tree/main/2semestre/LI/LI_AP_1_2022",
       demo: "",
       teamSize: "2 members"
     },
     {
       title: "LaTeX: Web Project",
-      course: "Introdução à Engenharia Informática",
+      course: "Introduction to Computer Engineering",
       period: "2021",
-      description: "Website educativo com conteúdos interativos, exercícios e visualizações para apoio ao estudo de Física, complementado por documentação em LaTeX.",
+      description: "Educational website with interactive content, exercises, and visualizations to support Physics studies, complemented by LaTeX documentation.",
       technologies: ["HTML", "CSS", "JavaScript", "LaTeX"],
       features: [
-        "Visualização de capítulos e conteúdos teóricos",
-        "Exercícios interativos com calculadora e gráficos",
-        "Relógio em tempo real e mapa interativo",
-        "Documentação científica em LaTeX"
+        "Visualization of chapters and theoretical content",
+        "Interactive exercises with calculator and graphs",
+        "Real-time clock and interactive map",
+        "Scientific documentation in LaTeX"
       ],
       github: "https://github.com/joaogasparp/leci_1ano/tree/main/1semestre/IEI/projeto",
       demo: "",
-      teamSize: "2 membros"
+      teamSize: "2 members"
     }
   ];
 
