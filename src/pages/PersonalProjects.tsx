@@ -27,100 +27,41 @@ const PersonalProjects: React.FC = () => {
 
   const projects = [
     {
-      title: "Portfolio Website",
-      description: "Modern, responsive portfolio website built with React and TypeScript. Features smooth animations, clean design, and optimal performance.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      title: "File Compression System",
+      description: "Complete file compression and decompression system with a modern web interface and C++ backend. Allows comparison of algorithms such as LZ77, Huffman, RLE, and others.",
+      technologies: ["React", "JavaScript", "Material-UI", "C++", "CMake", "Node.js"],
       features: [
-        "Responsive design for all devices",
-        "Smooth page transitions",
-        "Interactive navigation",
-        "Optimized performance"
+        "File upload and download via web interface",
+        "Comparison of multiple compression algorithms",
+        "Visualization of results and statistics",
+        "High-performance backend in C++",
+        "Automated build for frontend and backend"
       ],
-      github: "https://github.com/joaogasparp/portfolio",
-      demo: "https://joaogasparp.github.io/portfolio",
+      github: "https://github.com/joaogasparp/compressor-system",
+      demo: "https://compressor-system.onrender.com", // Add demo link if available
       status: "Completed",
-      year: "2024",
-      featured: true
+      year: "2025",
+      featured: true,
+      // image: require('../assets/compressor-preview.jpg'), // Example usage
+      // image: '/assets/compressor-preview.jpg', // If using public folder
     },
     {
-      title: "Task Management App",
-      description: "Full-stack task management application with real-time updates, user authentication, and collaborative features.",
-      technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
+      title: "Gesture Grab",
+      description: "Web app for gesture-based block manipulation. Allows users to interact with blocks using hand gestures detected via webcam.",
+      technologies: ["JavaScript", "HTML5", "Web APIs"],
       features: [
-        "Real-time collaboration",
-        "User authentication & authorization",
-        "Drag & drop task management",
-        "Team workspace creation"
+        "Real-time gesture detection",
+        "Block manipulation via gestures",
+        "Interactive and intuitive UI",
+        "Runs locally in the browser"
       ],
-      github: "https://github.com/joaogasparp/task-manager",
-      demo: "",
-      status: "In Development",
-      year: "2024",
-      featured: true
-    },
-    {
-      title: "Weather Dashboard",
-      description: "Interactive weather application with detailed forecasts, location search, and beautiful data visualizations.",
-      technologies: ["Vue.js", "Chart.js", "OpenWeather API", "CSS3"],
-      features: [
-        "7-day weather forecast",
-        "Interactive weather maps",
-        "Location-based predictions",
-        "Data visualization charts"
-      ],
-      github: "https://github.com/joaogasparp/weather-dashboard",
-      demo: "https://joaogasparp-weather.netlify.app",
-      status: "Completed",
-      year: "2023",
-      featured: false
-    },
-    {
-      title: "E-commerce Platform",
-      description: "Complete e-commerce solution with shopping cart, payment integration, and admin dashboard for product management.",
-      technologies: ["Next.js", "Stripe API", "PostgreSQL", "Tailwind CSS"],
-      features: [
-        "Product catalog & search",
-        "Shopping cart & checkout",
-        "Payment processing",
-        "Admin dashboard"
-      ],
-      github: "https://github.com/joaogasparp/ecommerce",
-      demo: "",
-      status: "In Development",
-      year: "2024",
-      featured: false
-    },
-    {
-      title: "Personal Finance Tracker",
-      description: "Budget tracking application with expense categorization, financial goals, and insightful spending analytics.",
-      technologies: ["React Native", "Firebase", "Chart.js", "Expo"],
-      features: [
-        "Expense tracking & categorization",
-        "Budget planning & goals",
-        "Spending analytics",
-        "Cross-platform mobile app"
-      ],
-      github: "https://github.com/joaogasparp/finance-tracker",
-      demo: "",
-      status: "Completed",
-      year: "2023",
-      featured: false
-    },
-    {
-      title: "Code Snippet Manager",
-      description: "Developer tool for organizing and sharing code snippets with syntax highlighting and search functionality.",
-      technologies: ["Electron", "CodeMirror", "SQLite", "CSS3"],
-      features: [
-        "Syntax highlighting for 50+ languages",
-        "Tag-based organization",
-        "Full-text search",
-        "Export & sharing capabilities"
-      ],
-      github: "https://github.com/joaogasparp/snippet-manager",
-      demo: "",
-      status: "Completed",
-      year: "2023",
-      featured: false
+      github: "https://github.com/joaogasparp/gesture_grab",
+      demo: "https://joaogasparp.github.io/gesture-grab/", // Add demo link if available
+      status: "In Progress",
+      year: "2025",
+      featured: true,
+      // image: require('../assets/gesture-grab-preview.jpg'), // Example usage
+      // image: '/assets/gesture-grab-preview.jpg', // If using public folder
     }
   ];
 
@@ -175,6 +116,17 @@ const PersonalProjects: React.FC = () => {
                   variants={itemVariants}
                   className="bg-white border-2 border-yellow-200 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
                 >
+                  {/* Preview Image (optional) */}
+                  {project.image && (
+                    <div className="mb-4 rounded-lg overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.title + ' preview'}
+                        className="w-full h-48 object-cover object-center border border-gray-100 shadow-sm"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
                   {/* Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center space-x-3">
@@ -182,9 +134,8 @@ const PersonalProjects: React.FC = () => {
                       <div>
                         <h3 className="heading-secondary text-xl text-black mb-1">{project.title}</h3>
                         <div className="flex items-center space-x-3">
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
-                          }`}>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                            }`}>
                             {project.status}
                           </span>
                           <div className="flex items-center space-x-1 text-sm text-gray-500">
@@ -268,12 +219,22 @@ const PersonalProjects: React.FC = () => {
                   variants={itemVariants}
                   className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
                 >
+                  {/* Preview Image (optional) */}
+                  {project.image && (
+                    <div className="mb-3 rounded-lg overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.title + ' preview'}
+                        className="w-full h-36 object-cover object-center border border-gray-100 shadow-sm"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
                   {/* Header */}
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="heading-secondary text-lg text-black">{project.title}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
-                    }`}>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                      }`}>
                       {project.status}
                     </span>
                   </div>
