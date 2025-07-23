@@ -124,6 +124,21 @@ const PersonalProjects: React.FC = () => {
     }
   ];
 
+  // Soft skills / acting section
+  const personalActivities = [
+    {
+      title: "Theater and Acting Activities",
+      description: (
+        <>
+          <span>
+            Acting in various theater plays, developing communication skills and teamwork abilities.<br />
+            Participation in workshops and acting courses.
+          </span>
+        </>
+      )
+    }
+  ];
+
   const featuredProjects = projects.filter(project => project.featured);
   const otherProjects = projects.filter(project => !project.featured);
 
@@ -143,7 +158,7 @@ const PersonalProjects: React.FC = () => {
               Personal Projects
             </h1>
             <p className="body-text-light text-lg max-w-2xl mx-auto">
-              Side projects and creative experiments showcasing passion for development and innovation
+              Side projects and creative experiments/activities showcasing passion for development and innovation
             </p>
           </motion.div>
 
@@ -311,6 +326,23 @@ const PersonalProjects: React.FC = () => {
                     )}
                     <span className="text-xs text-gray-400 ml-auto">{project.year}</span>
                   </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Personal Activities (Theater, Acting, etc.) */}
+          <motion.div variants={itemVariants} className="mt-16">
+            <h2 className="heading-secondary text-2xl text-black mb-8">Personal Activities</h2>
+            <div className="grid md:grid-cols-1 gap-6">
+              {personalActivities.map((activity, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h3 className="heading-secondary text-lg text-black mb-2">{activity.title}</h3>
+                  <div className="body-text text-gray-600 text-base leading-relaxed">{activity.description}</div>
                 </motion.div>
               ))}
             </div>

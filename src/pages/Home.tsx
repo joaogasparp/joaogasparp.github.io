@@ -71,7 +71,7 @@ const Home: React.FC = () => {
             variants={itemVariants}
             className="heading-primary text-5xl md:text-7xl text-black mb-6"
           >
-            João
+            João Gaspar
           </motion.h1>
 
           {/* Education & Location */}

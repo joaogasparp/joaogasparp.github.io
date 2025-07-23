@@ -36,6 +36,15 @@ const Experience: React.FC = () => {
       type: "Association"
     },
     {
+      title: "Aveiro Tech City Hackathon (1st Edition)",
+      company: "Aveiro Tech City",
+      period: "2022",
+      location: "Aveiro, Portugal",
+      description: "Participation in the first edition of the Aveiro Tech City Hackathon, collaborating with a multidisciplinary team to develop innovative tech solutions under time constraints.",
+      technologies: ["Hackathon", "Teamwork", "Innovation"],
+      type: "Competition"
+    },
+    {
       title: "Web and Desktop Developer",
       company: "Freelancer",
       period: "2020 - 2024",
@@ -81,10 +90,13 @@ const Experience: React.FC = () => {
                       <div className="flex items-center space-x-3 mb-2">
                         <FiBriefcase className="text-xl text-black" />
                         <h3 className="heading-secondary text-xl text-black">{exp.title}</h3>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${exp.type === 'Internship' ? 'bg-blue-100 text-blue-700' :
-                            exp.type === 'Freelance' ? 'bg-green-100 text-green-700' :
-                              'bg-purple-100 text-purple-700'
-                          }`}>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          exp.type === 'Internship' ? 'bg-blue-100 text-blue-700' :
+                          exp.type === 'Freelance' ? 'bg-green-100 text-green-700' :
+                          exp.type === 'Association' ? 'bg-purple-100 text-purple-700' :
+                          exp.type === 'Competition' ? 'bg-orange-100 text-orange-700' :
+                          'bg-gray-100 text-gray-700'
+                        }`}>
                           {exp.type}
                         </span>
                       </div>

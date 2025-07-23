@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import { motion } from 'framer-motion';
 import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin } from 'react-icons/fi';
 
@@ -31,10 +32,32 @@ const Contact: React.FC = () => {
     }
   };
 
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const userId = import.meta.env.VITE_EMAILJS_USER_ID;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission with EmailJS here
-    console.log('Form submitted:', formData);
+    setStatus('sending');
+    emailjs.send(
+      serviceId,
+      templateId,
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message
+      },
+      userId
+    )
+      .then(() => {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch(() => {
+        setStatus('error');
+      });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -55,7 +78,7 @@ const Contact: React.FC = () => {
           animate="visible"
         >
           {/* Title */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
+          <motion.div variants={itemVariants} className="text-center mb-8">
             <h1 className="heading-primary text-4xl md:text-5xl text-black mb-6">
               Get In Touch
             </h1>
@@ -64,6 +87,17 @@ const Contact: React.FC = () => {
             </p>
           </motion.div>
 
+            <motion.div variants={itemVariants} className="mb-8 text-center">
+            <span
+              className="inline-block px-4 py-2 rounded-full font-medium text-base"
+              style={{
+              background: 'rgba(99, 102, 241, 0.1)',
+              color: 'rgb(99, 102, 241)'
+              }}
+            >
+              Open to work and collaborations
+            </span>
+            </motion.div>
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <motion.div variants={itemVariants}>
@@ -110,8 +144,8 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="body-text font-medium text-black">LinkedIn</p>
-                    <a href="https://linkedin.com/in/joao-gaspar" target="_blank" rel="noopener noreferrer" className="body-text text-gray-600 hover:text-black transition-colors">
-                      linkedin.com/in/joao-gaspar
+                    <a href="https://linkedin.com/in/joaogasparp" target="_blank" rel="noopener noreferrer" className="body-text text-gray-600 hover:text-black transition-colors">
+                      linkedin.com/in/joaogasparp/
                     </a>
                   </div>
                 </div>
@@ -171,11 +205,18 @@ const Contact: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center space-x-2 bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors body-text font-medium"
+                  className="w-full flex items-center justify-center space-x-2 bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors body-text font-medium disabled:opacity-60"
+                  disabled={status === 'sending'}
                 >
                   <FiSend size={16} />
-                  <span>Send Message</span>
+                  <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
                 </button>
+                {status === 'success' && (
+                  <div className="text-green-600 text-center font-medium mt-2">Message sent successfully!</div>
+                )}
+                {status === 'error' && (
+                  <div className="text-red-600 text-center font-medium mt-2">Failed to send message. Please try again.</div>
+                )}
               </form>
             </motion.div>
           </div>
