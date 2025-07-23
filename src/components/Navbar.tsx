@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [activeButtonBounds, setActiveButtonBounds] = useState<{ x: number; y: number; width: number; height: number } | null>(null);
+  const [indicator, setIndicator] = useState<{ x: number; width: number } | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
@@ -35,76 +35,64 @@ const Navbar: React.FC = () => {
 
   // Atualizar posição do indicador ativo
   useEffect(() => {
-    const updateActiveButtonBounds = () => {
+    const updateIndicator = () => {
       if (!isMobile && navRef.current) {
-        // Procurar tanto no logo quanto nos botões do menu
         const activeButton = document.querySelector(`[data-path="${location.pathname}"]`);
         if (activeButton) {
           const buttonRect = activeButton.getBoundingClientRect();
           const navRect = navRef.current.getBoundingClientRect();
-          
-          setActiveButtonBounds({
+          setIndicator({
             x: buttonRect.x - navRect.x,
-            y: buttonRect.y - navRect.y,
-            width: buttonRect.width,
-            height: buttonRect.height,
+            width: buttonRect.width
           });
         }
       }
     };
-
-    // Delay para garantir que os elementos estão renderizados
-    setTimeout(updateActiveButtonBounds, 100);
+    setTimeout(updateIndicator, 80);
   }, [location.pathname, isMobile]);
 
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-[9999]">
+        <div className="px-2 py-3">
           <motion.div
-            className="mx-auto max-w-7xl bg-white/95 backdrop-blur-md border border-gray-200 rounded-2xl shadow-lg relative"
-            initial={{ y: -100, opacity: 0 }}
+            className="mx-auto max-w-5xl bg-white/70 backdrop-blur-lg border border-white/40 rounded-2xl shadow-xl relative"
+            initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             ref={navRef}
+            style={{ minHeight: 64 }}
           >
-            {/* Background animado global que se arrasta */}
-            {!isMobile && activeButtonBounds && (
+            {/* Glass indicator */}
+            {!isMobile && indicator && (
               <motion.div
-                className="absolute bg-black rounded-xl shadow-md z-0"
+                className="absolute top-2 bottom-2 bg-white/60 backdrop-blur-md rounded-xl z-0 border border-white/30 shadow"
                 initial={false}
                 animate={{
-                  x: activeButtonBounds.x,
-                  y: activeButtonBounds.y,
-                  width: activeButtonBounds.width,
-                  height: activeButtonBounds.height,
+                  x: indicator.x,
+                  width: indicator.width,
                 }}
                 transition={{
                   type: 'spring',
-                  stiffness: 300,
-                  damping: 25,
-                  mass: 0.8,
+                  stiffness: 350,
+                  damping: 30,
+                  mass: 1,
                 }}
               />
             )}
-
-            <div className="flex items-center justify-between px-6 py-4">
+            <div className="flex items-center justify-between px-4 py-2 relative">
               {/* Logo JG */}
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.97 }}
               >
                 <Link
                   to="/"
                   data-path="/"
-                  className={`
-                    flex items-center justify-center w-12 h-12 font-bold text-lg rounded-xl shadow-md hover:shadow-lg transition-all duration-300 relative z-10
-                    ${isActive('/') 
-                      ? 'bg-black text-white' 
-                      : 'text-black hover:text-gray-600 bg-transparent'
-                    }
-                  `}
+                  className={`flex items-center justify-center w-12 h-12 font-bold text-lg rounded-xl transition-all duration-300 relative z-10
+                    ${isActive('/') ? 'text-black' : 'text-black hover:text-gray-600'}`}
+                  style={{ background: 'none', boxShadow: 'none' }}
                 >
                   JG
                 </Link>
@@ -112,26 +100,23 @@ const Navbar: React.FC = () => {
 
               {/* Menu Desktop */}
               {!isMobile && (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
                   {navItems.slice(1).map((item, index) => (
                     <motion.div
                       key={item.path}
-                      initial={{ opacity: 0, y: -20 }}
+                      initial={{ opacity: 0, y: -16 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      transition={{ delay: index * 0.07 }}
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.97 }}
+                      style={{ position: 'relative' }}
                     >
                       <Link
                         to={item.path}
                         data-path={item.path}
-                        className={`
-                          relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 z-10
-                          ${isActive(item.path)
-                            ? 'bg-black text-white'
-                            : 'text-black hover:text-gray-600 bg-transparent'
-                          }
-                        `}
+                        className={`relative px-5 py-2 rounded-xl text-base font-medium transition-all duration-300 z-10
+                          ${isActive(item.path) ? 'text-black' : 'text-black hover:text-gray-600'}`}
+                        style={{ background: 'none', boxShadow: 'none', overflow: 'hidden', minWidth: 80 }}
                       >
                         <span className="relative z-10">{item.label}</span>
                       </Link>

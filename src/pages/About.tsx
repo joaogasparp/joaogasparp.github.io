@@ -25,29 +25,43 @@ const About: React.FC = () => {
     }
   };
 
-  const skills = [
-    'React & TypeScript',
-    'Node.js & Express',
-    'Python & Django',
-    'PostgreSQL & MongoDB',
-    'Docker & Kubernetes',
-    'AWS & Azure',
-    'Git & CI/CD',
-    'Agile Methodologies'
+  const allSkills = [
+    'angular', 'angularjs', 'arduino', 'azure', 'blender',
+    'bootstrap', 'c', 'canvasjs', 'chartjs', 'c++',
+    'css3', 'd3js', 'dart', 'django', 'docker',
+    'figma', 'firebase', 'flask', 'flutter', 'git',
+    'graphql', 'html5', 'java', 'javascript', 'kafka',
+    'kubernetes', 'linux', 'matlab', 'mongodb', 'mysql',
+    'nginx', 'nodejs', 'opencv', 'oracle', 'pandas',
+    'postgresql', 'python', 'pytorch', 'rabbitMQ',
+    'react', 'reactnative', 'seaborn', 'selenium', 'tailwind', 'tensorflow'
   ];
+
+  const [skillIndex, setSkillIndex] = React.useState(0);
+  const skillsPerPage = 15; // 3 rows x 5 columns
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setSkillIndex((prev) => (prev + skillsPerPage) % allSkills.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [allSkills.length]);
+  const visibleSkills = [];
+  for (let i = 0; i < skillsPerPage; i++) {
+    visibleSkills.push(allSkills[(skillIndex + i) % allSkills.length]);
+  }
 
   const education = [
     {
-      degree: "Master's in Informatics and Telecommunications Engineering",
+      degree: "Master's Degree in Computer and Telematics Engineering",
       institution: "University of Aveiro",
-      period: "2023 - Present",
-      description: "Advanced studies in software engineering, telecommunications, and distributed systems."
+      period: "2024 - Present",
+      description: "Advanced training in computer systems, IT, and telematics, with a focus on energy-efficient, high-performance, and sustainable infrastructures for smart cities, IoT, and Industry 5.0."
     },
     {
-      degree: "Bachelor's in Informatics and Telecommunications Engineering", 
+      degree: "Bachelor's Degree in Computer and Informatics Engineering",
       institution: "University of Aveiro",
-      period: "2020 - 2023",
-      description: "Foundation in computer science, programming, networks, and telecommunications systems."
+      period: "2021 - 2024",
+      description: "Bachelor's degree focused on computer systems architecture and communication networks, preparing graduates for innovation and development in the modern Information Society."
     }
   ];
 
@@ -78,13 +92,13 @@ const About: React.FC = () => {
               <div className="space-y-6">
                 {/* Profile Photo */}
                 <div className="relative">
-                  <div className="w-64 h-64 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center shadow-lg">
-                    {/* Placeholder for photo - replace with actual image */}
-                    <div className="text-center">
-                      <FiUser className="text-6xl text-gray-400 mb-4 mx-auto" />
-                      <p className="text-sm text-gray-500">Your Photo Here</p>
-                      <p className="text-xs text-gray-400 mt-1">Replace with /public/profile-photo.jpg</p>
-                    </div>
+                  <div className="w-64 h-64 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
+                    <img
+                      src="/profile-photo.jpg"
+                      alt="João Gaspar profile"
+                      className="object-cover w-full h-full rounded-2xl border-4 border-white/40 shadow-inner"
+                      draggable="false"
+                    />
                   </div>
                 </div>
 
@@ -97,7 +111,7 @@ const About: React.FC = () => {
                       <p className="body-text text-gray-600 text-sm">Aveiro, Portugal</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-3">
                     <FiCalendar className="text-lg text-black" />
                     <div>
@@ -105,6 +119,15 @@ const About: React.FC = () => {
                       <p className="body-text text-gray-600 text-sm">Open to opportunities</p>
                     </div>
                   </div>
+                  <a
+                    href="/cv_en.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full mt-4 px-4 py-2 text-center rounded-lg bg-white text-black font-medium border border-gray-200 shadow hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                    style={{ minHeight: '2.5rem' }}
+                  >
+                    <span>Preview CV</span>
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -118,17 +141,20 @@ const About: React.FC = () => {
                     <FiUser className="text-2xl text-black" />
                     <h2 className="heading-secondary text-2xl text-black">Who I Am</h2>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <p className="body-text text-gray-700 leading-relaxed">
-                      I'm a Computer and Telecommunications Engineering student with a passion for 
-                      developing robust and scalable solutions. My journey in technology has been 
-                      driven by curiosity and the desire to solve complex problems through code.
+                      Versatile professional with a strong background in Computers, Informatics, and
+                      Telematics, with a high capacity for adaptation and learning. Experienced in
+                      software and hardware development, and skilled in analyzing and solving
+                      technical problems through critical thinking and a structured approach.
+                      Proactive, dynamic, and committed to continuous improvement, with strong
+                      teamwork skills and the ability to thrive in challenging environments. 
                     </p>
-                    
+
                     <p className="body-text text-gray-700 leading-relaxed">
-                      Based in Aveiro, Portugal, I combine technical expertise with creative 
-                      thinking to build applications that make a difference. I believe in clean 
+                      Based in Aveiro, Portugal, I combine technical expertise with creative
+                      thinking to build applications that make a difference. I believe in clean
                       code, user-centered design, and continuous learning.
                     </p>
                   </div>
@@ -145,7 +171,7 @@ const About: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <FiHeart className="text-xl text-black mt-1 flex-shrink-0" />
                     <div>
@@ -155,7 +181,7 @@ const About: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <FiTarget className="text-xl text-black mt-1 flex-shrink-0" />
                     <div>
@@ -165,7 +191,7 @@ const About: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start space-x-4">
                     <FiAward className="text-xl text-black mt-1 flex-shrink-0" />
                     <div>
@@ -207,12 +233,16 @@ const About: React.FC = () => {
           {/* Skills Section */}
           <motion.div variants={itemVariants}>
             <h2 className="heading-secondary text-2xl text-black mb-8 text-center">Technical Skills</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {skills.map((skill, index) => (
+            <div className="grid grid-rows-3 grid-cols-5 gap-4">
+              {visibleSkills.map((skill, idx) => (
                 <motion.div
-                  key={skill}
+                  key={skill + idx}
                   variants={itemVariants}
-                  className="bg-gray-50 rounded-lg p-4 text-center border border-gray-100 hover:border-gray-200 transition-colors"
+                  className="bg-gray-50 rounded-lg p-4 text-center border border-gray-100 hover:border-gray-200 transition-colors text-sm capitalize"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <span className="body-text text-gray-700 font-medium">{skill}</span>
                 </motion.div>

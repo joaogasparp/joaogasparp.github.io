@@ -35,7 +35,7 @@ const Home: React.FC = () => {
     {
       name: 'LinkedIn',
       icon: FiLinkedin,
-      url: 'https://linkedin.com/in/joao-gaspar',
+      url: 'https://www.linkedin.com/in/joaogasparp/',
       label: 'LinkedIn Profile'
     },
     {
@@ -80,7 +80,7 @@ const Home: React.FC = () => {
             className="mb-12 space-y-2"
           >
             <p className="heading-secondary text-xl md:text-2xl text-gray-700">
-              Masters in Informatics and Telecommunications Engineering
+              Master's student in Computer and Telematics Engineering
             </p>
             <p className="body-text-light text-base tracking-wide uppercase">
               Aveiro, Portugal
