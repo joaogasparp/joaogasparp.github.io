@@ -1,0 +1,4 @@
+Poster de Aveiro na parede: o site carrega photos/aveiro.png automaticamente.
+O ficheiro atual e um placeholder ilustrado. Para usares uma foto tua, substitui-o
+por outra com o mesmo nome (aveiro.png). Fica cortada ao centro e ganha tom vintage.
+Recomendado: pelo menos 900 px de largura e proporcao quase quadrada.
