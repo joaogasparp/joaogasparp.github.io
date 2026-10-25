@@ -1,21 +1,56 @@
 <!doctype html>
-<html lang="pt-PT">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="João Gaspar — Engenharia de Computadores e Telemática, Universidade de Aveiro" />
+    <title>João Gaspar — Computer &amp; Telematics Engineering</title>
+    <meta name="description" content="Portfolio of João Gaspar, MSc student in Computer and Telematics Engineering at the University of Aveiro. Explore projects, experience and contacts on a nostalgic Windows XP desk." />
     <meta name="author" content="João Gaspar" />
-    <meta name="theme-color" content="#0b0d12" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href="https://joaogasparp.github.io/" />
+    <meta name="theme-color" content="#f1c7a4" />
+    <meta name="color-scheme" content="light" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://joaogasparp.github.io/" />
+    <meta property="og:site_name" content="João Gaspar" />
+    <meta property="og:title" content="João Gaspar — portfolio" />
+    <meta property="og:description" content="A nostalgic Windows XP desk full of secrets. Computer &amp; Telematics Engineering, University of Aveiro." />
+    <meta property="og:image" content="https://joaogasparp.github.io/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A cosy 3D desk with a retro PC showing Windows XP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://joaogasparp.github.io/og-image.jpg" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-    <title>João Gaspar</title>
-    <link rel="preload" as="image" href="/bliss.jpg" fetchpriority="high" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Kalam&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Kalam&display=swap" /></noscript>
+
+    <style>
+      html,body{margin:0;height:100%;background:#f1c7a4}
+      #boot{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 35%,#ffe9d2 0%,#f4cba8 55%,#e3b08a 100%);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:#21170f;text-align:center}
+      #boot b{display:block;font-size:22px;font-weight:600;letter-spacing:-.025em}
+      #boot span{display:block;margin-top:4px;font-size:13px;color:#5c4433}
+      #boot i{display:block;width:22px;height:22px;margin:18px auto 0;border-radius:50%;border:2px solid rgba(92,68,51,.22);border-top-color:#21170f;animation:boot-spin .8s linear infinite}
+      @keyframes boot-spin{to{transform:rotate(360deg)}}
+      @media (prefers-reduced-motion:reduce){#boot i{animation-duration:2.4s}}
+    </style>
+
+    <link rel="preload" as="image" href="/bliss.jpg" fetchpriority="high" crossorigin />
     <script type="module" crossorigin src="/assets/index-reBgcBfA.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/motion-VWn49yxV.js">
     <link rel="modulepreload" crossorigin href="/assets/react-BagigSc5.js">
+    <link rel="modulepreload" crossorigin href="/assets/Scene3D-7HnZwjDM.js">
+    <link rel="modulepreload" crossorigin href="/assets/three-2CMo_aKE.js">
     <link rel="stylesheet" crossorigin href="/assets/index-PT9VEVYX.css">
   </head>
-  <body><div id="root"></div></body>
+  <body>
+    <div id="root"><div id="boot" aria-busy="true"><div><b>João Gaspar</b><span>Computer &amp; Telematics Engineering · University of Aveiro</span><i></i></div></div></div>
+    <noscript><p style="font:16px/1.5 system-ui,sans-serif;padding:2rem;max-width:36rem;position:relative;z-index:1">João Gaspar — Computer &amp; Telematics Engineering, University of Aveiro. This site needs JavaScript. <a href="mailto:joaogaspar003@gmail.com">E-mail</a> · <a href="/cv_en.pdf">CV</a> · <a href="https://github.com/joaogasparp">GitHub</a> · <a href="https://www.linkedin.com/in/joaogasparp/">LinkedIn</a></p></noscript>
+  </body>
 </html>
